@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop Tools | Product Page Checker and Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, get ready-made schema code, and work out your real profit per sale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F5F1E8; --sand:#E8DFC9; --char:#1C1A17; --gold:#C9A227; --dgold:#7D6312;
+  --taupe:#6F675C; --line:#DCD2BC; --card:#FFFDF8; --good:#2F6B3F; --warn:#9A6A10; --bad:#9B2C2C;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--cream);color:var(--char);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.55}
+a{color:var(--dgold)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{padding:48px 0 24px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dgold);font-weight:600}
+h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(34px,5vw,54px);line-height:1.08;margin:10px 0 12px}
+h2{font-family:Fraunces,serif;font-weight:400;font-size:28px;margin:0 0 6px}
+h3{font-size:15px;margin:0 0 8px}
+.lead{color:var(--taupe);max-width:640px;margin:0}
+nav.tabs{display:flex;gap:8px;margin:28px 0 0;flex-wrap:wrap}
+nav.tabs button{font:inherit;font-weight:500;border:1px solid var(--line);background:transparent;color:var(--char);padding:9px 16px;border-radius:999px;cursor:pointer}
+nav.tabs button[aria-selected=true]{background:var(--char);color:var(--cream);border-color:var(--char)}
+main{padding:32px 0 56px}
+section[hidden]{display:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.grid>*{min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+label small{font-weight:400;color:var(--taupe)}
+input,textarea,select{width:100%;font:inherit;font-size:15px;color:var(--char);background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:120px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btns{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:600;font-size:14px;border-radius:999px;padding:10px 18px;cursor:pointer;border:1px solid var(--char);background:var(--char);color:var(--cream)}
+.btn.ghost{background:transparent;color:var(--char)}
+.score{display:flex;align-items:center;gap:18px;margin-bottom:6px}
+.ring{width:96px;height:96px;flex:none}
+.ring circle{fill:none;stroke-width:9}
+.ring .bg{stroke:var(--sand)}
+.ring .fg{stroke:var(--gold);stroke-linecap:round;transition:stroke-dashoffset .5s}
+.ring text{font-family:Fraunces,serif;font-size:26px;fill:var(--char)}
+.verdict{font-family:Fraunces,serif;font-size:22px}
+.sub{color:var(--taupe);font-size:14px}
+.checks{list-style:none;padding:0;margin:14px 0 0}
+.checks li{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.checks li b{font-weight:600}
+.dot{width:14px;height:14px;border-radius:50%;margin-top:4px}
+.ok .dot{background:var(--good)} .mid .dot{background:var(--gold)} .no .dot{background:var(--bad)}
+.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:6px;background:var(--sand);color:var(--dgold);margin-left:6px}
+.serp{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;margin-top:16px}
+.serp .u{font-size:13px;color:#4d5156}
+.serp .t{font-size:19px;color:#1a0dab;margin:2px 0;line-height:1.3}
+.serp .d{font-size:14px;color:#4d5156}
+pre{background:var(--char);color:#F2EBDD;border-radius:12px;padding:14px;font-size:12.5px;overflow:auto;max-height:280px;margin:10px 0 0}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.kpi{background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kpi .v{font-family:Fraunces,serif;font-size:26px}
+.kpi .l{font-size:12px;color:var(--taupe)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td{padding:8px 0;border-top:1px solid var(--line)}
+td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--taupe);margin-top:12px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);font-size:13px}
+.neg{color:var(--bad)} .pos{color:var(--good)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
+    <h1>Make every product page<br>easy to find and worth selling.</h1>
+    <p class="lead">Two free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
+      <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+<!-- TOOL 1 -->
+<section id="checker">
+  <div class="grid">
+    <div class="card">
+      <h2>Your product page</h2>
+      <p class="sub">Paste what is on the page now. Use the example to see how it works.</p>
+      <div class="row">
+        <div><label for="pName">Product name</label><input id="pName" placeholder="Daily Glow Serum"></div>
+        <div><label for="pBrand">Brand <small>(optional)</small></label><input id="pBrand" placeholder="Dewlane"></div>
+      </div>
+      <label for="pKey">Main keyword <small>(what buyers type)</small></label>
+      <input id="pKey" placeholder="vitamin c face serum">
+      <label for="pTitle">SEO title <small>(the blue line on Google)</small></label>
+      <input id="pTitle">
+      <label for="pMeta">Meta description</label>
+      <textarea id="pMeta" style="min-height:70px"></textarea>
+      <label for="pDesc">Product description</label>
+      <textarea id="pDesc" style="min-height:160px"></textarea>
+      <label for="pFaq">Questions and answers <small>(Q: on one line, A: on the next)</small></label>
+      <textarea id="pFaq" placeholder="Q: Is it good for sensitive skin?&#10;A: Yes. It is fragrance free and..."></textarea>
+      <div class="row">
+        <div><label for="pPrice">Price <small>(optional)</small></label><input id="pPrice" inputmode="decimal" placeholder="29.00"></div>
+        <div><label for="pCur">Currency</label><select id="pCur"><option>USD</option><option>EUR</option><option>GBP</option><option>PLN</option></select></div>
+      </div>
+      <div class="btns">
+        <button class="btn" id="runCheck">Check my page</button>
+        <button class="btn ghost" id="loadExample">Load example</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" id="result">
+        <div class="score">
+          <svg class="ring" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="bg" cx="50" cy="50" r="42"/>
+            <circle class="fg" id="ringFg" cx="50" cy="50" r="42" stroke-dasharray="263.9" stroke-dashoffset="263.9" transform="rotate(-90 50 50)"/>
+            <text id="ringTxt" x="50" y="59" text-anchor="middle">0</text>
+          </svg>
+          <div>
+            <div class="verdict" id="verdict">Waiting for your page</div>
+            <div class="sub" id="verdictSub">Fill in the form and press "Check my page".</div>
+          </div>
+        </div>
+        <ul class="checks" id="checks"></ul>
+      </div>
+
+      <div class="card" style="margin-top:20px">
+        <h3>Google preview</h3>
+        <div class="serp">
+          <div class="u" id="serpUrl">yourshop.com &rsaquo; products</div>
+          <div class="t" id="serpTitle">Your SEO title shows here</div>
+          <div class="d" id="serpDesc">Your meta description shows here.</div>
+        </div>
+        <h3 style="margin-top:20px">Schema code for Google and AI tools <span class="tag">AEO</span></h3>
+        <p class="sub" style="margin:0">Paste this into your product page. It tells search engines and AI assistants exactly what you sell and answers common questions.</p>
+        <pre id="schema">{ }</pre>
+        <div class="btns"><button class="btn ghost" id="copySchema">Copy code</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOL 2 -->
+<section id="profit" hidden>
+  <div class="grid">
+    <div class="card">
+      <h2>One sale, real numbers</h2>
+      <p class="sub">Type your own fees. Every marketplace and payment provider is different, so check yours.</p>
+      <div class="row">
+        <div><label for="cCost">Product cost</label><input id="cCost" inputmode="decimal" value="8"></div>
+        <div><label for="cShip">Shipping you pay</label><input id="cShip" inputmode="decimal" value="4.5"></div>
+      </div>
+      <div class="row">
+        <div><label for="cPack">Packaging</label><input id="cPack" inputmode="decimal" value="0.8"></div>
+        <div><label for="cAds">Ad cost per sale</label><input id="cAds" inputmode="decimal" value="3"></div>
+      </div>
+      <div class="row">
+        <div><label for="cFeePct">Platform fee %</label><input id="cFeePct" inputmode="decimal" value="10"></div>
+        <div><label for="cFeeFix">Fixed fee per order</label><input id="cFeeFix" inputmode="decimal" value="0.3"></div>
+      </div>
+      <div class="row">
+        <div><label for="cPayPct">Payment fee %</label><input id="cPayPct" inputmode="decimal" value="2.9"></div>
+        <div><label for="cPrice">Your selling price</label><input id="cPrice" inputmode="decimal" value="29"></div>
+      </div>
+      <label for="cTarget">Profit margin you want %</label>
+      <input id="cTarget" inputmode="decimal" value="30">
+    </div>
+
+    <div class="card">
+      <div class="kpis">
+        <div class="kpi"><div class="v" id="kProfit">0</div><div class="l">Profit per sale</div></div>
+        <div class="kpi"><div class="v" id="kMargin">0%</div><div class="l">Margin</div></div>
+        <div class="kpi"><div class="v" id="kBreak">0</div><div class="l">Break-even price</div></div>
+      </div>
+      <table id="breakdown"></table>
+      <div class="card" style="margin-top:16px;background:var(--cream)">
+        <h3 style="margin:0">Price for your target margin</h3>
+        <div class="verdict" id="kTargetPrice" style="margin-top:6px">0</div>
+        <div class="sub" id="kTargetNote"></div>
+      </div>
+      <p class="note">Margin = profit &divide; selling price. Fees in % are taken from the selling price.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Built by Tuli (Satin &amp; Scale) to show how I work: simple tools, clear numbers, no passwords. Open source. Free to use.</div>
+</footer>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  // ---------- tabs ----------
+  document.querySelectorAll('nav.tabs button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', x===b));
+      document.querySelectorAll('main section').forEach(s=>s.hidden = s.id!==b.dataset.tab);
+      if(b.dataset.tab==='profit') calcProfit();
+    });
+  });
+
+  // ---------- helpers ----------
+  const words = t => (t.trim().match(/[\p{L}\p{N}'-]+/gu)||[]);
+  const sentences = t => t.split(/[.!?]+\s/).map(s=>s.trim()).filter(Boolean);
+  const has = (t,k) => k && t.toLowerCase().includes(k.toLowerCase());
+  const count = (t,k) => { if(!k) return 0; const re = new RegExp(k.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'); return (t.toLowerCase().match(re)||[]).length; };
+  const esc = s => s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function parseFaq(t){
+    const out=[]; let q=null;
+    t.split(/\n/).forEach(line=>{
+      const l=line.trim(); if(!l) return;
+      if(/^q[:.)]/i.test(l)){ q={q:l.replace(/^q[:.)]\s*/i,''),a:''}; out.push(q); }
+      else if(/^a[:.)]/i.test(l) && q){ q.a=l.replace(/^a[:.)]\s*/i,''); }
+      else if(q){ q.a += (q.a?' ':'')+l; }
+    });
+    return out.filter(x=>x.q && x.a);
+  }
+
+  // ---------- checker ----------
+  function runCheck(){
+    const name=$('pName').value.trim(), brand=$('pBrand').value.trim(), key=$('pKey').value.trim();
+    const title=$('pTitle').value.trim(), meta=$('pMeta').value.trim(), desc=$('pDesc').value.trim();
+    const faq=parseFaq($('pFaq').value), price=$('pPrice').value.trim(), cur=$('pCur').value;
+    const checks=[]; let pts=0, max=0;
+    const add=(group,label,state,tip,w)=>{ max+=w; pts+= state==='ok'?w : state==='mid'?w/2:0; checks.push({group,label,state,tip}); };
+
+    // SEO
+    const tl=title.length;
+    add('SEO','SEO title length', tl>=30&&tl<=60?'ok':(tl>0&&tl<=70?'mid':'no'), `${tl} characters. Aim for 30 to 60 so Google shows it in full.`,10);
+    add('SEO','Keyword in SEO title', has(title,key)?'ok':'no', key?`"${key}" ${has(title,key)?'is':'is not'} in the title.`:'Add a main keyword first.',12);
+    const ml=meta.length;
+    add('SEO','Meta description length', ml>=120&&ml<=160?'ok':(ml>=70&&ml<=180?'mid':'no'), `${ml} characters. Aim for 120 to 160.`,8);
+    add('SEO','Keyword in meta description', has(meta,key)?'ok':'no', 'Buyers see bold matching words in results.',6);
+    const first = desc.slice(0,160);
+    add('SEO','Keyword early in description', has(first,key)?'ok':(has(desc,key)?'mid':'no'), 'Use it in the first sentence, once, naturally.',8);
+    const w=words(desc).length, dens = w? (count(desc,key)*words(key).length)/w*100 : 0;
+    add('SEO','No keyword stuffing', dens<=3?'ok':(dens<=5?'mid':'no'), `Keyword density ${dens.toFixed(1)}%. Keep it under 3%.`,6);
+
+    // Selling copy
+    add('Sales','Enough detail', w>=120&&w<=400?'ok':(w>=60?'mid':'no'), `${w} words. 120 to 400 answers most buyer questions.`,10);
+    const sents=sentences(desc), avg = sents.length? w/sents.length : 0;
+    add('Sales','Easy to read', avg>0&&avg<=18?'ok':(avg<=24&&avg>0?'mid':'no'), `Average sentence: ${avg.toFixed(0)} words. Short sentences sell.`,8);
+    const bullets=(desc.match(/^\s*([-•*]|\d+\.)\s+/gm)||[]).length;
+    add('Sales','Scannable bullet points', bullets>=3?'ok':(bullets>=1?'mid':'no'), `${bullets} bullet lines. Phone shoppers scan, they do not read.`,6);
+    const nums=(desc.match(/\d/g)||[]).length;
+    add('Sales','Real facts and numbers', nums>=3?'ok':(nums>=1?'mid':'no'), 'Sizes, ml, materials, care, delivery days. Facts build trust.',6);
+
+    // AEO
+    add('AEO','Questions and answers', faq.length>=4?'ok':(faq.length>=2?'mid':'no'), `${faq.length} found. AI assistants love clear Q and A. Aim for 4 to 6.`,10);
+    const direct = faq.filter(f=>words(sentences(f.a)[0]||f.a).length<=30).length;
+    add('AEO','Answers start with a direct reply', faq.length&&direct===faq.length?'ok':(direct>0?'mid':'no'), 'First sentence answers the question in under 30 words.',6);
+    add('AEO','Product name is clear', name && (has(title,name)||has(desc,name))?'ok':(name?'mid':'no'), 'Use the exact product name in the title or description.',4);
+
+    const score = Math.round(pts/max*100);
+    const off = 263.9*(1-score/100);
+    $('ringFg').style.strokeDashoffset = off; $('ringTxt').textContent = score;
+    $('verdict').textContent = score>=85?'Strong page':score>=60?'Good start, a few fixes':'Needs work';
+    const fixes = checks.filter(c=>c.state!=='ok').length;
+    $('verdictSub').textContent = fixes? `${fixes} thing${fixes>1?'s':''} to fix. Start from the top.` : 'Nothing to fix. Nice work.';
+    const order={no:0,mid:1,ok:2};
+    $('checks').innerHTML = checks.sort((a,b)=>order[a.state]-order[b.state]).map(c=>
+      `<li class="${c.state}"><span class="dot"></span><span><b>${esc(c.label)}</b><span class="tag">${c.group}</span><br><span class="sub">${esc(c.tip)}</span></span></li>`).join('');
+
+    // SERP
+    const slug = (name||'product').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    $('serpUrl').textContent = `yourshop.com › products › ${slug}`;
+    $('serpTitle').textContent = title ? (tl>60? title.slice(0,57)+'...' : title) : 'Your SEO title shows here';
+    $('serpDesc').textContent = meta ? (ml>160? meta.slice(0,157)+'...' : meta) : 'Your meta description shows here.';
+
+    // Schema
+    const product = {"@context":"https://schema.org","@type":"Product","name":name||"Product name","description":(meta||desc.slice(0,300))};
+    if(brand) product.brand={"@type":"Brand","name":brand};
+    if(price && !isNaN(parseFloat(price))) product.offers={"@type":"Offer","price":parseFloat(price).toFixed(2),"priceCurrency":cur,"availability":"https://schema.org/InStock"};
+    const blocks=[product];
+    if(faq.length) blocks.push({"@context":"https://schema.org","@type":"FAQPage","mainEntity":faq.map(f=>({"@type":"Question","name":f.q,"acceptedAnswer":{"@type":"Answer","text":f.a}}))});
+    $('schema').textContent = blocks.map(b=>'<script type="application/ld+json">\n'+JSON.stringify(b,null,2)+'\n</'+'script>').join('\n\n');
+  }
+
+  function loadExample(){
+    $('pName').value='Daily Glow Serum';
+    $('pBrand').value='Dewlane';
+    $('pKey').value='vitamin c face serum';
+    $('pTitle').value='Daily Glow Vitamin C Face Serum, 30 ml | Dewlane';
+    $('pMeta').value='A light vitamin C face serum for a brighter, even look. 3 drops each morning, no sticky feel, fragrance free. Free returns within 30 days.';
+    $('pDesc').value='The Daily Glow Serum is a light vitamin C face serum for a brighter, more even look. Use 3 drops in the morning after cleansing. It sinks in fast, so you can put on sunscreen and makeup right away. No greasy shine, no strong smell.\n\n- 30 ml glass bottle with a dropper\n- Fragrance free and vegan\n- Light texture that dries in about a minute\n- About 2 months of daily use\n- Made in small batches in Europe\n\nHow to use: press 3 drops into clean, dry skin with your fingertips. Follow with your usual moisturiser and SPF. Start every other day for the first week if your skin is new to vitamin C. Store the bottle in a cool place, away from direct sun, and close the cap well after each use.';
+    $('pFaq').value='Q: Is it good for sensitive skin?\nA: It is fragrance free and gentle. Test on a small area first if your skin reacts easily.\nQ: When should I use it?\nA: In the morning, after cleansing and before moisturiser and SPF.\nQ: How long does one bottle last?\nA: About 2 months with 3 drops a day.\nQ: Can I return it?\nA: Yes. You can return it within 30 days.';
+    $('pPrice').value='29.00'; $('pCur').value='EUR';
+    runCheck();
+  }
+
+  $('runCheck').addEventListener('click',runCheck);
+  $('loadExample').addEventListener('click',loadExample);
+  $('copySchema').addEventListener('click',()=>{
+    const t=$('schema').textContent;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('copySchema').textContent='Copied';setTimeout(()=>$('copySchema').textContent='Copy code',1500);}).catch(()=>{});
+  });
+
+  // ---------- profit ----------
+  const n = id => { const v=parseFloat(($(id).value||'').replace(',','.')); return isNaN(v)?0:v; };
+  const money = v => (v<0?'-':'')+Math.abs(v).toFixed(2);
+  function calcProfit(){
+    const cost=n('cCost'), ship=n('cShip'), pack=n('cPack'), ads=n('cAds');
+    const feeP=n('cFeePct')/100, fix=n('cFeeFix'), payP=n('cPayPct')/100, price=n('cPrice'), target=n('cTarget')/100;
+    const fees = price*feeP + fix + price*payP;
+    const totalCost = cost+ship+pack+ads+fees;
+    const profit = price - totalCost;
+    const margin = price? profit/price*100 : 0;
+    const fixedAll = cost+ship+pack+ads+fix;
+    const breakEven = (1-feeP-payP)>0 ? fixedAll/(1-feeP-payP) : NaN;
+    const denom = 1-feeP-payP-target;
+    const targetPrice = denom>0 ? fixedAll/denom : NaN;
+    $('kProfit').textContent = money(profit); $('kProfit').className='v '+(profit<0?'neg':'pos');
+    $('kMargin').textContent = margin.toFixed(0)+'%';
+    $('kBreak').textContent = isNaN(breakEven)?'n/a':money(breakEven);
+    $('breakdown').innerHTML = [
+      ['Selling price',price],['Product cost',-cost],['Shipping',-ship],['Packaging',-pack],['Ads',-ads],
+      ['Platform and payment fees',-fees],['Profit',profit]
+    ].map(r=>`<tr><td>${r[0]}</td><td class="${r[1]<0?'neg':''}">${money(r[1])}</td></tr>`).join('');
+    $('kTargetPrice').textContent = isNaN(targetPrice)?'Not possible':money(targetPrice);
+    $('kTargetNote').textContent = isNaN(targetPrice)? 'Fees plus your margin are 100% or more. Lower the margin or the fees.' :
+      (price>=targetPrice? 'Your price already reaches this margin.' : `Raise your price by ${money(targetPrice-price)} to reach ${(target*100).toFixed(0)}% margin.`);
+  }
+  document.querySelectorAll('#profit input').forEach(i=>i.addEventListener('input',calcProfit));
+  calcProfit();
+})();
+</script>
+</body>
+</html>
