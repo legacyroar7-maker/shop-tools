@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop Tools | Product Page Checker and Profit Calculator</title>
-<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, get ready-made schema code, and work out your real profit per sale.">
+<title>Shop Tools | Product Page Checker, Title Checker and Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google, and work out your real profit per sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -70,6 +70,14 @@ td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 .note{font-size:13px;color:var(--taupe);margin-top:12px}
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);font-size:13px}
 .neg{color:var(--bad)} .pos{color:var(--good)}
+.lim{padding:12px 0;border-top:1px solid var(--line)} .lim:first-child{border-top:0;padding-top:4px}
+.lim .top{display:flex;justify-content:space-between;gap:10px;font-size:14px;font-weight:600}
+.lim .top span:last-child{font-variant-numeric:tabular-nums}
+.bar{height:8px;background:var(--sand);border-radius:99px;overflow:hidden;margin:7px 0 6px}
+.bar i{display:block;height:100%;background:var(--good);transition:width .2s}
+.bar.near i{background:var(--gold)} .bar.over i{background:var(--bad)}
+.cut{font-size:13px;color:var(--taupe);margin-top:6px;word-break:break-word;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.cut mark{background:#F3D9D9;color:var(--bad);text-decoration:line-through}
 </style>
 </head>
 <body>
@@ -77,9 +85,10 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   <div class="wrap">
     <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
     <h1>Make every product page<br>easy to find and worth selling.</h1>
-    <p class="lead">Two free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <p class="lead">Three free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
+      <button role="tab" aria-selected="false" data-tab="titles">Title checker</button>
       <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
     </nav>
   </div>
@@ -148,6 +157,35 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   </div>
 </section>
 
+<!-- TOOL 3: title checker -->
+<section id="titles" hidden>
+  <div class="grid">
+    <div class="card">
+      <h2>Will your title fit?</h2>
+      <p class="sub">Type or paste a product title. The counts update as you type. Words past the limit are cut off or not accepted, so put the most important words first.</p>
+      <label for="tTitle">Product title</label>
+      <textarea id="tTitle" style="min-height:90px" placeholder="Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze"></textarea>
+      <label for="tMeta">Meta description <small>(optional, for your Shopify or website product page)</small></label>
+      <textarea id="tMeta" style="min-height:90px"></textarea>
+      <div class="btns">
+        <button class="btn" id="tExample">Load example</button>
+        <button class="btn ghost" id="tClear">Clear</button>
+      </div>
+      <p class="note">Limits used: Etsy title 140 characters and eBay title 80 characters (the platform will not accept more). Shopify SEO title about 60 and meta description about 155 characters (what Google usually shows in full; longer text gets cut). Platforms change their rules, so check the help pages of yours.</p>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Character counts</h3>
+        <div id="tBars"></div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>Quick fixes for the title</h3>
+        <ul class="checks" id="tChecks"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- TOOL 2 -->
 <section id="profit" hidden>
   <div class="grid">
@@ -193,7 +231,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 </main>
 
 <footer>
-  <div class="wrap">Built by Tuli (Satin &amp; Scale) to show how I work: simple tools, clear numbers, no passwords. Open source. Free to use.</div>
+  <div class="wrap">Built by Tuli (Satin &amp; Scale) to show how I work: simple tools, clear numbers, no passwords. Open source. Free to use.<br>Want this done for your shop? I write SEO and AEO product listings as a fixed-price project: <a href="https://www.upwork.com/freelancers/~01c18d191d6a95988c" target="_blank" rel="noopener">Hire me on Upwork</a></div>
 </footer>
 
 <script>
@@ -206,6 +244,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
       document.querySelectorAll('nav.tabs button').forEach(x=>x.setAttribute('aria-selected', x===b));
       document.querySelectorAll('main section').forEach(s=>s.hidden = s.id!==b.dataset.tab);
       if(b.dataset.tab==='profit') calcProfit();
+      if(b.dataset.tab==='titles') checkTitles();
     });
   });
 
@@ -333,6 +372,56 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   }
   document.querySelectorAll('#profit input').forEach(i=>i.addEventListener('input',calcProfit));
   calcProfit();
+
+  // ---------- title checker ----------
+  const LIMITS=[
+    {name:'Etsy title',src:'tTitle',max:140,hard:true,who:'Etsy'},
+    {name:'eBay title',src:'tTitle',max:80,hard:true,who:'eBay'},
+    {name:'Shopify SEO title (Google)',src:'tTitle',max:60,hard:false},
+    {name:'Meta description (Google)',src:'tMeta',max:155,hard:false}
+  ];
+  const STOP=new Set(['and','the','for','with','from','your','you','this','that','are','our']);
+  function checkTitles(){
+    const vals={tTitle:$('tTitle').value, tMeta:$('tMeta').value};
+    $('tBars').innerHTML = LIMITS.map(L=>{
+      const c=Array.from(vals[L.src]), n=c.length, over=n-L.max;
+      const cls = over>0?'over':(n>L.max*0.9?'near':'');
+      const msg = n===0 ? 'Empty.' : over>0
+        ? (L.hard ? `${over} character${over>1?'s':''} over. ${L.who} will not accept a title this long.` : `${over} character${over>1?'s':''} over. Google will likely cut the end.`)
+        : `Fits. ${L.max-n} character${L.max-n===1?'':'s'} left.`;
+      const cut = over>0 ? `<div class="cut">${esc(c.slice(0,L.max).join(''))}<mark>${esc(c.slice(L.max).join(''))}</mark></div>` : '';
+      return `<div class="lim"><div class="top"><span>${L.name}</span><span class="${over>0?'neg':''}">${n} / ${L.max}</span></div><div class="bar ${cls}"><i style="width:${Math.min(100,n/L.max*100)}%"></i></div><div class="sub">${msg}</div>${cut}</div>`;
+    }).join('');
+
+    const t=vals.tTitle, out=[];
+    const item=(state,label,tip)=>out.push(`<li class="${state}"><span class="dot"></span><span><b>${esc(label)}</b><br><span class="sub">${esc(tip)}</span></span></li>`);
+    if(!t.trim()){ $('tChecks').innerHTML='<li class="mid"><span class="dot"></span><span><b>Waiting for a title</b><br><span class="sub">Type a title or press "Load example".</span></span></li>'; return; }
+    if(/^\s|\s$|\s{2,}/.test(t)) item('no','Extra spaces','Spaces count as characters. Remove spaces at the start, at the end and double spaces.');
+    else item('ok','No extra spaces','Every character is doing work.');
+    const ws=t.match(/[\p{L}\p{N}][\p{L}\p{N}'-]*/gu)||[];
+    const caps=ws.filter(w=>/\p{Lu}/u.test(w) && w.replace(/[^\p{L}]/gu,'').length>=2 && w===w.toUpperCase());
+    if(caps.length>3) item('no',`${caps.length} words in capital letters`,`${caps.join(', ')}. Etsy allows up to 3. Write them in normal case.`);
+    else if(caps.length) item('ok',`${caps.length} word${caps.length>1?'s':''} in capital letters`,'Fine. Etsy allows up to 3.');
+    else item('ok','No words in capital letters','Normal case is easier to read.');
+    const twice=['%',':','&','+'].filter(ch=>t.split(ch).length>2);
+    if(twice.length) item('no','Symbol used more than once',`${twice.join(' ')} used twice or more. Etsy allows % : & + only once each.`);
+    else item('ok','Symbols are fine','Etsy allows % : & + once each.');
+    const cnt={}; ws.forEach(w=>{const k=w.toLowerCase(); if(k.length>=3 && !STOP.has(k) && !/^\d+$/.test(k)) cnt[k]=(cnt[k]||0)+1;});
+    const rep=Object.keys(cnt).filter(k=>cnt[k]>1);
+    if(rep.length) item('mid','Repeated words',`${rep.map(k=>`${k} (${cnt[k]}x)`).join(', ')}. Repeats use up space. Swap one for a new detail buyers search for, like size, colour or material.`);
+    else item('ok','No repeated words','Each word adds something new.');
+    const first=Array.from(t.trim()).slice(0,40).join('');
+    item('mid','First 40 characters',`"${first}". Phones and search results often show only the start. Is the product type here?`);
+    $('tChecks').innerHTML=out.join('');
+  }
+  ['tTitle','tMeta'].forEach(id=>$(id).addEventListener('input',checkTitles));
+  $('tExample').addEventListener('click',()=>{
+    $('tTitle').value='Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze, Stoneware Mug, Gift for Tea and Coffee Lovers';
+    $('tMeta').value='A handmade stoneware coffee mug in a speckled sage glaze. Holds 350 ml and is safe in the dishwasher and microwave. Made to order and packed with care.';
+    checkTitles();
+  });
+  $('tClear').addEventListener('click',()=>{ $('tTitle').value=''; $('tMeta').value=''; checkTitles(); });
+  checkTitles();
 })();
 </script>
 </body>

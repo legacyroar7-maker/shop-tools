@@ -1,6 +1,6 @@
 # Shop Tools
 
-**Free tools for online shop owners. Check a product page for SEO and AEO, and see your real profit per sale.**
+**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google, and see your real profit per sale.**
 
 **Live demo:** https://legacyroar7-maker.github.io/shop-tools/
 
@@ -18,7 +18,23 @@ Paste your product name, keyword, SEO title, meta description, description and F
 - **A Google preview** of how the page looks in search results
 - **Ready-made schema code** (Product + FAQPage, JSON-LD) to paste into Shopify or any shop
 
-### 2. Profit calculator
+### 2. Marketplace title checker (new)
+Type or paste a product title. Live character counts show if it fits:
+
+| Where | Limit | What happens if it is longer |
+|---|---|---|
+| Etsy title | 140 characters | Etsy will not accept it |
+| eBay title | 80 characters | eBay will not accept it |
+| Shopify SEO title | about 60 characters | Google usually cuts the end |
+| Meta description | about 155 characters | Google usually cuts the end |
+
+The part that does not fit is shown crossed out, so you see exactly which words buyers lose. You also get quick fixes: extra spaces, too many words in CAPITALS (Etsy allows 3), symbols used twice (Etsy allows % : & + once each), repeated words, and a look at your first 40 characters.
+
+![Marketplace title checker](preview-titles.png)
+
+Tip: put the product type and the words buyers search for first. Limits can change, so check your platform's help pages too.
+
+### 3. Profit calculator
 Type your product cost, shipping, packaging, ads and fees. You get:
 
 - Profit per sale and margin
@@ -41,3 +57,5 @@ Open the live demo, press **Load example** to see how it works, then paste your 
 
 ---
 Built by **Tuli, Satin & Scale**. I build Shopify stores, write product pages with SEO and AEO, make AI product videos and build small web apps for shops.
+
+Want this done for your shop or deck? I do it as a fixed-price project on Upwork: [Hire me on Upwork](https://www.upwork.com/freelancers/~01c18d191d6a95988c)
