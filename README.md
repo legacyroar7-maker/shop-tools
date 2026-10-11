@@ -56,6 +56,6 @@ One HTML file, plain JavaScript, no frameworks, no build step. Hosted free on Gi
 Open the live demo, press **Load example** to see how it works, then paste your own page.
 
 ---
-Built by **Tuli, Satin & Scale**. I build Shopify stores, write product pages with SEO and AEO, make AI product videos and build small web apps for shops.
+Built by **Tuli, Satin & Scale**. I build Shopify stores, write product pages with SEO and AEO, make AI product videos and build web apps for shops.
 
 Want this done for your shop or deck? I do it as a fixed-price project on Upwork: [Hire me on Upwork](https://www.upwork.com/freelancers/~01c18d191d6a95988c)
