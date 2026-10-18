@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop Tools | Product Page Checker, Title Checker and Profit Calculator</title>
-<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google, and work out your real profit per sale.">
+<title>Shop Tools | Product Page Checker, Title Checkers and Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), and work out your real profit per sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -78,6 +78,28 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 .bar.near i{background:var(--gold)} .bar.over i{background:var(--bad)}
 .cut{font-size:13px;color:var(--taupe);margin-top:6px;word-break:break-word;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px}
 .cut mark{background:#F3D9D9;color:var(--bad);text-decoration:line-through}
+.bwrap{overflow-x:auto;margin-top:6px}
+.btable{min-width:620px}
+.btable th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--taupe);font-weight:600;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+.btable td,.btable td:last-child{text-align:left;vertical-align:top;padding:10px 10px 10px 0}
+.btable td.num{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--taupe)}
+.btable .bt{white-space:pre-wrap;word-break:break-word}
+.btable .bt mark{background:#F3D9D9;color:var(--bad);text-decoration:line-through}
+.btable ul{margin:0;padding-left:18px;font-size:13px}
+.btable li{margin:2px 0}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:#E2EEE4;color:var(--good)} .pill.no{background:#F3D9D9;color:var(--bad)}
+.inline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;margin:14px 0 0}
+.inline input{width:auto}
+@media (max-width:640px){
+  .btable{min-width:0}
+  .btable thead{display:none}
+  .btable tr{display:grid;grid-template-columns:28px 1fr;gap:2px 6px;padding:10px 0;border-top:1px solid var(--line)}
+  .btable td,.btable td:last-child{border-top:0;padding:0}
+  .btable td:first-child{grid-row:span 3}
+  .btable td:not(:first-child){grid-column:2}
+  .btable td[colspan]{grid-column:1/-1;grid-row:auto}
+}
 </style>
 </head>
 <body>
@@ -85,10 +107,11 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   <div class="wrap">
     <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
     <h1>Make every product page<br>easy to find and worth selling.</h1>
-    <p class="lead">Three free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <p class="lead">Four free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
       <button role="tab" aria-selected="false" data-tab="titles">Title checker</button>
+      <button role="tab" aria-selected="false" data-tab="bulk">Bulk title checker</button>
       <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
     </nav>
   </div>
@@ -186,6 +209,46 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   </div>
 </section>
 
+<!-- TOOL 4: bulk title checker -->
+<section id="bulk" hidden>
+  <div class="card">
+    <h2>Check many titles at once</h2>
+    <p class="sub">Paste one title per line (up to 500). Each title gets a row with what to fix: too long, repeated words, words in capitals, extra spaces and the same title used twice. Good for checking a whole shop before you upload or edit listings.</p>
+    <div class="row">
+      <div><label for="bLimit">Check against</label>
+        <select id="bLimit">
+          <option value="140">Etsy title (140 characters)</option>
+          <option value="80" selected>eBay title (80 characters)</option>
+          <option value="60">Shopify SEO title (about 60 characters)</option>
+          <option value="custom">My own limit</option>
+        </select></div>
+      <div><label for="bCustom">My own limit <small>(characters)</small></label><input id="bCustom" inputmode="numeric" value="100" disabled></div>
+    </div>
+    <label for="bList">Titles <small>(one per line)</small></label>
+    <textarea id="bList" style="min-height:200px" placeholder="Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze&#10;Merino Wool Beanie Hat, Unisex, Charcoal Grey, One Size"></textarea>
+    <div class="btns">
+      <button class="btn" id="bRun">Check titles</button>
+      <button class="btn ghost" id="bExample">Load example</button>
+      <button class="btn ghost" id="bCsv">Download results (CSV)</button>
+      <button class="btn ghost" id="bClear">Clear</button>
+    </div>
+    <p class="note">Tip: export your products from Shopify, Etsy or eBay, copy the title column and paste it here. Nothing leaves your browser.</p>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <div class="kpis">
+      <div class="kpi"><div class="v" id="bTotal">0</div><div class="l">Titles checked</div></div>
+      <div class="kpi"><div class="v" id="bFix">0</div><div class="l">Need a fix</div></div>
+      <div class="kpi"><div class="v" id="bLong">0</div><div class="l">Too long</div></div>
+    </div>
+    <label class="inline"><input type="checkbox" id="bOnly"> Show only titles that need a fix</label>
+    <div class="bwrap"><table class="btable">
+      <thead><tr><th>#</th><th>Title</th><th>Length</th><th>What to fix</th></tr></thead>
+      <tbody id="bRows"><tr><td colspan="4" class="sub">Paste titles or press "Load example".</td></tr></tbody>
+    </table></div>
+    <p class="note">The part past the limit is crossed out. Etsy and eBay will not accept a title over their limit. For Shopify, Google usually cuts the end of a long SEO title. Platforms change their rules, so check the help pages of yours.</p>
+  </div>
+</section>
+
 <!-- TOOL 2 -->
 <section id="profit" hidden>
   <div class="grid">
@@ -231,7 +294,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 </main>
 
 <footer>
-  <div class="wrap">Built by Tuli (Satin &amp; Scale) to show how I work: simple tools, clear numbers, no passwords. Open source. Free to use.<br>Want this done for your shop? I write SEO and AEO product listings as a fixed-price project: <a href="https://www.upwork.com/freelancers/~01c18d191d6a95988c" target="_blank" rel="noopener">Hire me on Upwork</a></div>
+  <div class="wrap">Built by Tuli (Satin &amp; Scale) to show how I work: useful tools, clear numbers, no passwords. Open source. Free to use.<br>Want this done for your shop? I write SEO and AEO product listings as a fixed-price project: <a href="https://www.upwork.com/freelancers/~01c18d191d6a95988c" target="_blank" rel="noopener">Hire me on Upwork</a></div>
 </footer>
 
 <script>
@@ -245,6 +308,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
       document.querySelectorAll('main section').forEach(s=>s.hidden = s.id!==b.dataset.tab);
       if(b.dataset.tab==='profit') calcProfit();
       if(b.dataset.tab==='titles') checkTitles();
+      if(b.dataset.tab==='bulk') runBulk();
     });
   });
 
@@ -422,6 +486,86 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   });
   $('tClear').addEventListener('click',()=>{ $('tTitle').value=''; $('tMeta').value=''; checkTitles(); });
   checkTitles();
+
+  // ---------- bulk title checker ----------
+  const MAXLINES=500;
+  let bulkData=[];
+  function bulkLimit(){
+    if($('bLimit').value==='custom'){ const v=parseInt($('bCustom').value,10); return v>0?v:100; }
+    return parseInt($('bLimit').value,10);
+  }
+  function checkOne(t,limit){
+    const fixes=[], c=Array.from(t), n=c.length;
+    if(n>limit) fixes.push(`${n-limit} character${n-limit>1?'s':''} too long. Cut filler words or move them to the description.`);
+    if(/^\s|\s$|\s{2,}/.test(t)) fixes.push('Extra spaces at the start, at the end or between words.');
+    const ws=t.match(/[\p{L}\p{N}][\p{L}\p{N}'-]*/gu)||[];
+    const letters=t.replace(/[^\p{L}]/gu,'');
+    if(letters.length>=4 && letters===letters.toUpperCase() && letters!==letters.toLowerCase()) fixes.push('Whole title in CAPITALS. Write it in normal case.');
+    else {
+      const caps=ws.filter(w=>/\p{Lu}/u.test(w) && w.replace(/[^\p{L}]/gu,'').length>=2 && w===w.toUpperCase());
+      if(caps.length>3) fixes.push(`${caps.length} words in CAPITALS (${caps.join(', ')}). Etsy allows 3.`);
+    }
+    const cnt={}; ws.forEach(w=>{const k=w.toLowerCase(); if(k.length>=3 && !STOP.has(k) && !/^\d+$/.test(k)) cnt[k]=(cnt[k]||0)+1;});
+    const rep=Object.keys(cnt).filter(k=>cnt[k]>1);
+    if(rep.length) fixes.push(`Repeated: ${rep.map(k=>`${k} (${cnt[k]}x)`).join(', ')}. Swap a repeat for size, colour or material.`);
+    return {n, long:n>limit, fixes};
+  }
+  function runBulk(){
+    const limit=bulkLimit();
+    const lines=$('bList').value.split(/\r?\n/).map((t,i)=>({t:t.replace(/\r/g,''),line:i+1})).filter(x=>x.t.trim()).slice(0,MAXLINES);
+    const firstRow={};
+    bulkData=lines.map((x,i)=>{
+      const r=checkOne(x.t,limit), key=x.t.trim().replace(/\s+/g,' ').toLowerCase();
+      if(firstRow[key]) r.fixes.push(`Same title as row ${firstRow[key]}. Make each title different so buyers can tell them apart.`);
+      else firstRow[key]=i+1;
+      return Object.assign({title:x.t,row:i+1},r);
+    });
+    const need=bulkData.filter(d=>d.fixes.length).length, long=bulkData.filter(d=>d.long).length;
+    $('bTotal').textContent=bulkData.length; $('bFix').textContent=need; $('bLong').textContent=long;
+    $('bFix').className='v '+(need?'neg':''); $('bLong').className='v '+(long?'neg':'');
+    const only=$('bOnly').checked;
+    const rows=bulkData.filter(d=>!only||d.fixes.length);
+    if(!bulkData.length){ $('bRows').innerHTML='<tr><td colspan="4" class="sub">Paste titles or press "Load example".</td></tr>'; return; }
+    if(!rows.length){ $('bRows').innerHTML='<tr><td colspan="4" class="sub">Every title passed. Nothing to fix.</td></tr>'; return; }
+    $('bRows').innerHTML=rows.map(d=>{
+      const c=Array.from(d.title);
+      const tt=d.long?`${esc(c.slice(0,limit).join(''))}<mark>${esc(c.slice(limit).join(''))}</mark>`:esc(d.title);
+      const fx=d.fixes.length?`<span class="pill no">${d.fixes.length} to fix</span><ul>${d.fixes.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>`:'<span class="pill ok">OK</span>';
+      return `<tr><td class="num">${d.row}</td><td class="bt">${tt}</td><td class="num ${d.long?'neg':''}">${d.n} / ${limit}</td><td>${fx}</td></tr>`;
+    }).join('');
+    if(lines.length===MAXLINES && $('bList').value.split(/\r?\n/).filter(t=>t.trim()).length>MAXLINES)
+      $('bRows').insertAdjacentHTML('beforeend',`<tr><td colspan="4" class="sub">Only the first ${MAXLINES} titles were checked.</td></tr>`);
+  }
+  function bulkCsv(){
+    if(!bulkData.length) runBulk();
+    if(!bulkData.length) return;
+    const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+    const limit=bulkLimit();
+    const out=[['row','title','length','limit','status','what_to_fix'].join(',')].concat(
+      bulkData.map(d=>[d.row,q(d.title),d.n,limit,d.fixes.length?'fix':'ok',q(d.fixes.join(' | '))].join(',')));
+    const blob=new Blob(['﻿'+out.join('\r\n')],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='title-check-results.csv';
+    document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+  }
+  $('bLimit').addEventListener('change',()=>{ $('bCustom').disabled=$('bLimit').value!=='custom'; runBulk(); });
+  ['bList','bCustom'].forEach(id=>$(id).addEventListener('input',runBulk));
+  $('bOnly').addEventListener('change',runBulk);
+  $('bRun').addEventListener('click',runBulk);
+  $('bCsv').addEventListener('click',bulkCsv);
+  $('bClear').addEventListener('click',()=>{ $('bList').value=''; runBulk(); });
+  $('bExample').addEventListener('click',()=>{
+    $('bList').value=[
+      'Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze',
+      'Fernmoor Womens Wool Cardigan Size M Oatmeal Cable Knit Button Front Chunky Winter Knit Jumper',
+      'LINEN SHIRT MEN BLUE SUMMER SHIRT',
+      'Stoneware Mug, Mug Gift, Coffee Mug for Coffee Lovers',
+      'Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze',
+      'Soy Candle  in Amber Jar, Fig and Cedar, 200 g ',
+      'Leather Card Holder, Slim Wallet, Tan, Hand Stitched',
+      'Merino Wool Beanie Hat, Unisex, Charcoal Grey, One Size'
+    ].join('\n');
+    $('bLimit').value='80'; $('bCustom').disabled=true; runBulk();
+  });
 })();
 </script>
 </body>

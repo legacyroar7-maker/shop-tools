@@ -1,6 +1,6 @@
 # Shop Tools
 
-**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google, and see your real profit per sale.**
+**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), and see your real profit per sale.**
 
 **Live demo:** https://legacyroar7-maker.github.io/shop-tools/
 
@@ -18,7 +18,7 @@ Paste your product name, keyword, SEO title, meta description, description and F
 - **A Google preview** of how the page looks in search results
 - **Ready-made schema code** (Product + FAQPage, JSON-LD) to paste into Shopify or any shop
 
-### 2. Marketplace title checker (new)
+### 2. Marketplace title checker
 Type or paste a product title. Live character counts show if it fits:
 
 | Where | Limit | What happens if it is longer |
@@ -34,7 +34,29 @@ The part that does not fit is shown crossed out, so you see exactly which words 
 
 Tip: put the product type and the words buyers search for first. Limits can change, so check your platform's help pages too.
 
-### 3. Profit calculator
+### 3. Bulk title checker (new)
+Paste many titles at once, one per line (up to 500). Pick the limit: Etsy 140, eBay 80, Shopify SEO title about 60, or your own number. Each title gets a row that shows:
+
+| Check | What it flags |
+|---|---|
+| Too long | How many characters are over the limit. The extra part is crossed out. |
+| Repeated words | Words used twice or more, like "mug (3x)". Repeats waste space. |
+| CAPITALS | A whole title in capital letters, or more than 3 words in capitals (Etsy allows 3). |
+| Extra spaces | Spaces at the start, at the end or double spaces. They count as characters. |
+| Same title twice | Two listings with the same title, so buyers cannot tell them apart. |
+
+You also get a count of titles that need a fix, a filter to show only those, and a **Download results (CSV)** button to work through the list in a spreadsheet.
+
+How to use it with your shop:
+
+1. Export your products (Shopify: Products > Export. Etsy: Settings > Options > Download data. eBay: Seller Hub > Reports > Downloads).
+2. Open the file and copy the title column.
+3. Paste it into the bulk checker and pick your platform.
+4. Fix the rows marked in red first, starting with titles that are too long.
+
+![Bulk title checker](preview-bulk.png)
+
+### 4. Profit calculator
 Type your product cost, shipping, packaging, ads and fees. You get:
 
 - Profit per sale and margin
