@@ -1,6 +1,6 @@
 # Shop Tools
 
-**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), and see your real profit per sale.**
+**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), check your 13 Etsy tags, and see your real profit per sale.**
 
 **Live demo:** https://legacyroar7-maker.github.io/shop-tools/
 
@@ -34,7 +34,7 @@ The part that does not fit is shown crossed out, so you see exactly which words 
 
 Tip: put the product type and the words buyers search for first. Limits can change, so check your platform's help pages too.
 
-### 3. Bulk title checker (new)
+### 3. Bulk title checker
 Paste many titles at once, one per line (up to 500). Pick the limit: Etsy 140, eBay 80, Shopify SEO title about 60, or your own number. Each title gets a row that shows:
 
 | Check | What it flags |
@@ -56,7 +56,32 @@ How to use it with your shop:
 
 ![Bulk title checker](preview-bulk.png)
 
-### 4. Profit calculator
+### 4. Etsy tag checker (new)
+Paste your tags, one per line or with commas between them. Add your listing title too (optional). Each tag gets a row with what to fix:
+
+| Check | What it flags | Colour |
+|---|---|---|
+| Too long | Tags over 20 characters. The extra part is crossed out. | Red: Etsy will not take it |
+| Characters not allowed | Symbols like & / # ! . Use letters, numbers and spaces. An apostrophe or hyphen is fine inside a tag, not as the first character. | Red |
+| Same tag twice | A repeat wastes one of your 13 slots. | Red |
+| More than 13 tags | Etsy takes 13. Rows after 13 are marked. | Red |
+| One word only | A 2 or 3 word phrase, like "sage green mug", is closer to what buyers type. | Gold: a tip |
+| Only repeats the title | Every word is already in your title. Allowed, but the slot could add a style, an occasion or who it is for. | Gold: a tip |
+
+At the top you see tags used out of 13, how many need a fix and how many free slots are left. **Copy tags for Etsy** copies up to 13 tags that pass the rules, with extra spaces and repeats removed, separated by commas. Paste them into the Tags box of your listing.
+
+How to use it with your shop:
+
+1. Open a listing in Etsy (Shop Manager > Listings) and copy its tags and title.
+2. Paste them into the tag checker.
+3. Fix the red rows first, then fill any free slots.
+4. Use the gold tips to swap weak tags for phrases buyers type: style, occasion, who it is for, material.
+
+![Etsy tag checker](preview-tags.png)
+
+Rules used come from Etsy's help pages: up to 13 tags, up to 20 characters each. Platforms change their rules, so check Etsy's help pages too.
+
+### 5. Profit calculator
 Type your product cost, shipping, packaging, ads and fees. You get:
 
 - Profit per sale and margin

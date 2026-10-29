@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop Tools | Product Page Checker, Title Checkers and Profit Calculator</title>
-<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), and work out your real profit per sale.">
+<title>Shop Tools | Product Page Checker, Title and Tag Checkers, Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), check your 13 Etsy tags, and work out your real profit per sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -91,6 +91,10 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 .pill.ok{background:#E2EEE4;color:var(--good)} .pill.no{background:#F3D9D9;color:var(--bad)}
 .inline{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;margin:14px 0 0}
 .inline input{width:auto}
+.gtable{min-width:560px}
+.gtable td.bt{width:30%}
+.pill.mid{background:#F4EBCF;color:var(--warn)}
+.btable li.tip{color:var(--warn)}
 @media (max-width:640px){
   .btable{min-width:0}
   .btable thead{display:none}
@@ -99,6 +103,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   .btable td:first-child{grid-row:span 3}
   .btable td:not(:first-child){grid-column:2}
   .btable td[colspan]{grid-column:1/-1;grid-row:auto}
+  .gtable td.bt{width:auto}
+  .kpi .v{font-size:22px}
 }
 </style>
 </head>
@@ -107,11 +113,12 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   <div class="wrap">
     <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
     <h1>Make every product page<br>easy to find and worth selling.</h1>
-    <p class="lead">Four free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <p class="lead">Five free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Check your 13 Etsy tags. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
       <button role="tab" aria-selected="false" data-tab="titles">Title checker</button>
       <button role="tab" aria-selected="false" data-tab="bulk">Bulk title checker</button>
+      <button role="tab" aria-selected="false" data-tab="tags">Etsy tag checker</button>
       <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
     </nav>
   </div>
@@ -249,6 +256,44 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   </div>
 </section>
 
+<!-- TOOL 5: Etsy tag checker -->
+<section id="tags" hidden>
+  <div class="grid">
+    <div class="card">
+      <h2>Check your 13 Etsy tags</h2>
+      <p class="sub">Paste your tags, one per line or with commas between them. Add your title too, so the tool can spot tags that only repeat it. The results update as you type.</p>
+      <label for="gTitle">Listing title <small>(optional)</small></label>
+      <textarea id="gTitle" style="min-height:70px" placeholder="Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze"></textarea>
+      <label for="gList">Tags <small>(one per line or comma separated)</small></label>
+      <textarea id="gList" style="min-height:200px" placeholder="sage green mug&#10;stoneware coffee cup&#10;gift for tea lover"></textarea>
+      <div class="btns">
+        <button class="btn" id="gExample">Load example</button>
+        <button class="btn ghost" id="gCopy">Copy tags for Etsy</button>
+        <button class="btn ghost" id="gClear">Clear</button>
+      </div>
+      <p class="note">Rules used, from Etsy's help pages: up to 13 tags, up to 20 characters each. Use letters, numbers and spaces. An apostrophe (') or hyphen (-) is fine inside a tag but not as the first character. "Copy tags for Etsy" copies up to 13 tags that pass these rules, with extra spaces and repeats removed, separated by commas, ready to paste into the Tags box. Platforms change their rules, so check Etsy's help pages too.</p>
+    </div>
+    <div>
+      <div class="card">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="gUsed">0/13</div><div class="l">Tags used</div></div>
+          <div class="kpi"><div class="v" id="gFix">0</div><div class="l">Need a fix</div></div>
+          <div class="kpi"><div class="v" id="gFree">13</div><div class="l">Free slots</div></div>
+        </div>
+        <ul class="checks" id="gSum"></ul>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h3>Tag by tag</h3>
+    <div class="bwrap"><table class="btable gtable">
+      <thead><tr><th>#</th><th>Tag</th><th>Length</th><th>What to fix</th></tr></thead>
+      <tbody id="gRows"><tr><td colspan="4" class="sub">Paste your tags or press "Load example".</td></tr></tbody>
+    </table></div>
+    <p class="note">Red means Etsy will not take the tag as it is. Gold is a tip: the tag works, but the slot could do more. The part past 20 characters is crossed out.</p>
+  </div>
+</section>
+
 <!-- TOOL 2 -->
 <section id="profit" hidden>
   <div class="grid">
@@ -309,6 +354,7 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
       if(b.dataset.tab==='profit') calcProfit();
       if(b.dataset.tab==='titles') checkTitles();
       if(b.dataset.tab==='bulk') runBulk();
+      if(b.dataset.tab==='tags') runTags();
     });
   });
 
@@ -566,6 +612,83 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
     ].join('\n');
     $('bLimit').value='80'; $('bCustom').disabled=true; runBulk();
   });
+
+  // ---------- Etsy tag checker ----------
+  const TAGMAX=20, TAGCOUNT=13;
+  const tagWords = t => (t.toLowerCase().match(/[\p{L}\p{N}]+/gu)||[]);
+  const stem = w => (w.length>3 && /s$/.test(w) && !/ss$/.test(w)) ? w.slice(0,-1) : w;
+  let tagClean=[];
+  function runTags(){
+    const raw=$('gList').value.split(/[\n,]/).filter(t=>t.trim());
+    const titleSet=new Set(tagWords($('gTitle').value).filter(w=>!STOP.has(w)).map(stem));
+    const seen={}; let fixN=0;
+    tagClean=[];
+    const data=raw.map((t,i)=>{
+      const clean=t.trim().replace(/\s+/g,' '), c=Array.from(clean), n=c.length;
+      const key=clean.toLowerCase(), errs=[], tips=[];
+      if(i>=TAGCOUNT) errs.push(`Tag number ${i+1}. Etsy takes only ${TAGCOUNT} tags. Use it in place of a weaker tag, or drop it.`);
+      if(n>TAGMAX) errs.push(`${n-TAGMAX} character${n-TAGMAX>1?'s':''} too long. Etsy will not take it. Cut a word or use a shorter word.`);
+      const bad=[...new Set(c.filter(ch=>!/[\p{L}\p{N} '’-]/u.test(ch)))];
+      if(bad.length) errs.push(`Not allowed: ${bad.join(' ')}. Use letters, numbers and spaces only.`);
+      else if(/^['’-]/.test(clean)) errs.push('Starts with an apostrophe or hyphen. Start with a letter or number.');
+      if(seen[key]) errs.push(`Same as tag ${seen[key]}. Each tag should be different.`);
+      else seen[key]=i+1;
+      if(/\s{2,}/.test(t.trim())) tips.push('Extra spaces. They are removed when you copy the tags.');
+      const ws=tagWords(clean);
+      if(ws.length===1 && !errs.length) tips.push('One word only. Buyers usually type 2 or 3 words, like "sage green mug". A phrase uses the slot better.');
+      const core=ws.filter(w=>!STOP.has(w)).map(stem);
+      if(titleSet.size && core.length && core.every(w=>titleSet.has(w)) && !errs.length) tips.push('Every word is already in your title. That is allowed, but this slot could add something new: a style, an occasion or who it is for.');
+      if(errs.length) fixN++;
+      const ruleOk = n<=TAGMAX && !bad.length && !/^['\u2019-]/.test(clean);
+      if(ruleOk && !tagClean.some(x=>x.toLowerCase()===key)) tagClean.push(clean);
+      return {i:i+1, clean, n, errs, tips};
+    });
+    tagClean=tagClean.slice(0,TAGCOUNT);
+    const used=Math.min(raw.length,TAGCOUNT), free=TAGCOUNT-used;
+    $('gUsed').textContent=`${raw.length}/${TAGCOUNT}`; $('gUsed').className='v '+(raw.length>TAGCOUNT?'neg':'');
+    $('gFix').textContent=fixN; $('gFix').className='v '+(fixN?'neg':'');
+    $('gFree').textContent=free;
+    const sum=[];
+    const item=(state,label,tip)=>sum.push(`<li class="${state}"><span class="dot"></span><span><b>${esc(label)}</b><br><span class="sub">${esc(tip)}</span></span></li>`);
+    if(!raw.length) item('mid','Waiting for your tags','Paste your tags or press "Load example".');
+    else {
+      if(raw.length>TAGCOUNT) item('no',`${raw.length-TAGCOUNT} tag${raw.length-TAGCOUNT>1?'s':''} too many`,`Etsy takes ${TAGCOUNT}. Keep the phrases buyers are most likely to type.`);
+      else if(free) item('mid',`${free} free slot${free>1?'s':''}`,`Etsy lets you add ${TAGCOUNT} tags. Each empty slot is a search phrase you are not using.`);
+      else item('ok','All 13 slots used','Good. Every slot can bring a different search.');
+      if(fixN) item('no',`${fixN} tag${fixN>1?'s':''} Etsy will not take as written`,'Fix the red rows below first.');
+      else item('ok','Every tag fits Etsy\'s rules',`Up to ${TAGCOUNT} tags, ${TAGMAX} characters each, letters, numbers and spaces.`);
+      const tipN=data.filter(d=>d.tips.length).length;
+      if(tipN) item('mid',`${tipN} tag${tipN>1?'s':''} could work harder`,'See the gold tips below.');
+      if(!titleSet.size) item('mid','No title added','Add your title to see which tags only repeat it.');
+    }
+    $('gSum').innerHTML=sum.join('');
+    if(!data.length){ $('gRows').innerHTML='<tr><td colspan="4" class="sub">Paste your tags or press "Load example".</td></tr>'; return; }
+    $('gRows').innerHTML=data.map(d=>{
+      const c=Array.from(d.clean), long=d.n>TAGMAX;
+      const tt=long?`${esc(c.slice(0,TAGMAX).join(''))}<mark>${esc(c.slice(TAGMAX).join(''))}</mark>`:esc(d.clean);
+      const pill=d.errs.length?`<span class="pill no">Fix</span>`:d.tips.length?`<span class="pill mid">Tip</span>`:'<span class="pill ok">OK</span>';
+      const list=d.errs.length||d.tips.length?`<ul>${d.errs.map(f=>`<li>${esc(f)}</li>`).join('')}${d.tips.map(f=>`<li class="tip">${esc(f)}</li>`).join('')}</ul>`:'';
+      return `<tr><td class="num">${d.i}</td><td class="bt">${tt}</td><td class="num ${long?'neg':''}">${d.n} / ${TAGMAX}</td><td>${pill}${list}</td></tr>`;
+    }).join('');
+  }
+  ['gList','gTitle'].forEach(id=>$(id).addEventListener('input',runTags));
+  $('gClear').addEventListener('click',()=>{ $('gList').value=''; $('gTitle').value=''; runTags(); });
+  $('gCopy').addEventListener('click',()=>{
+    runTags();
+    const t=tagClean.join(', ');
+    if(!t) return;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('gCopy').textContent='Copied';setTimeout(()=>$('gCopy').textContent='Copy tags for Etsy',1500);}).catch(()=>{});
+  });
+  $('gExample').addEventListener('click',()=>{
+    $('gTitle').value='Handmade Ceramic Coffee Mug, 350 ml, Speckled Sage Glaze, Stoneware Mug for Tea';
+    $('gList').value=[
+      'sage green mug','handmade ceramic mug','speckled stoneware cup for coffee','gift for tea lover',
+      'mug','coffee mug','pottery mug & saucer','sage green mug','housewarming gift',
+      'minimalist kitchen','  rustic farmhouse  decor','-handmade','gift for her','birthday gift idea','cottagecore mug'
+    ].join('\n');
+    runTags();
+  });
+  runTags();
 })();
 </script>
 </body>
