@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop Tools | Product Page Checker, Title and Tag Checkers, Profit Calculator</title>
-<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), check your 13 Etsy tags, and work out your real profit per sale.">
+<title>Shop Tools | Product Page Checker, Title and Tag Checkers, Alt Text Helper, Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), check your 13 Etsy tags, write alt text for product photos, and work out your real profit per sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -95,6 +95,22 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 .gtable td.bt{width:30%}
 .pill.mid{background:#F4EBCF;color:var(--warn)}
 .btable li.tip{color:var(--warn)}
+.lbl{display:block;font-size:13px;font-weight:600;margin:14px 0 6px}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+.shots label{display:flex;align-items:center;gap:8px;font-weight:500;font-size:14px;margin:0;cursor:pointer}
+.shots input{width:auto;margin:0}
+.arow{padding:14px 0;border-top:1px solid var(--line)}
+.arow:first-child{border-top:0;padding-top:4px}
+.arow .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;font-weight:600}
+.arow .acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.arow .cnt{font-variant-numeric:tabular-nums;color:var(--taupe);font-weight:500}
+.arow .cnt.neg{color:var(--bad)}
+.arow textarea{min-height:62px;margin-top:8px}
+.arow ul{margin:4px 0 0;padding-left:18px;font-size:13px}
+.arow li{margin:2px 0}
+.arow li.err{color:var(--bad)} .arow li.tip{color:var(--warn)}
+.btn.sm{padding:5px 12px;font-size:13px}
+@media (max-width:640px){.shots{grid-template-columns:1fr}}
 @media (max-width:640px){
   .btable{min-width:0}
   .btable thead{display:none}
@@ -113,12 +129,13 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   <div class="wrap">
     <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
     <h1>Make every product page<br>easy to find and worth selling.</h1>
-    <p class="lead">Five free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Check your 13 Etsy tags. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <p class="lead">Six free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Check your 13 Etsy tags. Write alt text for your product photos. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
       <button role="tab" aria-selected="false" data-tab="titles">Title checker</button>
       <button role="tab" aria-selected="false" data-tab="bulk">Bulk title checker</button>
       <button role="tab" aria-selected="false" data-tab="tags">Etsy tag checker</button>
+      <button role="tab" aria-selected="false" data-tab="alt">Alt text helper</button>
       <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
     </nav>
   </div>
@@ -291,6 +308,73 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
       <tbody id="gRows"><tr><td colspan="4" class="sub">Paste your tags or press "Load example".</td></tr></tbody>
     </table></div>
     <p class="note">Red means Etsy will not take the tag as it is. Gold is a tip: the tag works, but the slot could do more. The part past 20 characters is crossed out.</p>
+  </div>
+</section>
+
+<!-- TOOL 6: alt text helper -->
+<section id="alt" hidden>
+  <div class="grid">
+    <div class="card">
+      <h2>Write alt text for your product photos</h2>
+      <p class="sub">Alt text tells shoppers who use a screen reader what is in each photo. It also helps search engines and AI tools understand your images. Fill in the product once, tick the photos you have, and get short alt text for each one. You can edit every line.</p>
+      <label for="aProduct">Product type</label>
+      <input id="aProduct" placeholder="coffee mug">
+      <div class="row">
+        <div><label for="aColour">Colour</label><input id="aColour" placeholder="sage green"></div>
+        <div><label for="aMaterial">Material</label><input id="aMaterial" placeholder="stoneware"></div>
+      </div>
+      <div class="row">
+        <div><label for="aBrand">Brand <small>(optional)</small></label><input id="aBrand" placeholder="Fernmoor"></div>
+        <div><label for="aSize">Size <small>(optional)</small></label><input id="aSize" placeholder="350 ml, 9 cm tall"></div>
+      </div>
+      <label for="aDetail">Key detail <small>(optional: pattern, finish or feature)</small></label>
+      <input id="aDetail" placeholder="speckled glaze">
+      <label for="aScene">Scene for the "in use" photo <small>(optional)</small></label>
+      <input id="aScene" placeholder="filled with coffee on a wooden breakfast table">
+      <span class="lbl">Photos you have</span>
+      <div class="shots" id="aShots"></div>
+      <div class="btns">
+        <button class="btn" id="aExample">Load example</button>
+        <button class="btn ghost" id="aCopy">Copy all</button>
+        <button class="btn ghost" id="aClear">Clear</button>
+      </div>
+      <p class="note">Write the words in lowercase, except names. The brand goes in the main photo and the label photo only, so it does not repeat on every image.</p>
+    </div>
+    <div>
+      <div class="card">
+        <div class="kpis">
+          <div class="kpi"><div class="v" id="aCount">0</div><div class="l">Photos</div></div>
+          <div class="kpi"><div class="v" id="aOver">0</div><div class="l">Over 125</div></div>
+          <div class="kpi"><div class="v" id="aFixN">0</div><div class="l">Need a fix</div></div>
+        </div>
+        <ul class="checks" id="aSum"></ul>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>Where to paste it</h3>
+        <p class="sub" style="margin:0"><b>Shopify:</b> Products, open the product, click the photo, add alt text, save.<br><b>Etsy:</b> Shop Manager, Listings, open the listing, click the photo, fill in "Alt text", press Apply.</p>
+        <p class="note">Shopify takes up to 512 characters and suggests 125 or fewer. Etsy takes up to about 250. This tool uses 125 for both, so the text is quick to hear. Platforms change their rules, so check their help pages too.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h3>Alt text by photo</h3>
+    <p class="sub">Edit any line to match your real photo. The checks update as you type.</p>
+    <div id="aRows"></div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h3>Check alt text you already have</h3>
+    <p class="sub">Paste your current alt text, one per line (up to 200). Each line gets a check: too long, file names, the same word again and again, "Photo of" at the start, sales words, capitals and emoji.</p>
+    <label for="aList">Alt text <small>(one per line)</small></label>
+    <textarea id="aList" style="min-height:130px" placeholder="Sage green stoneware coffee mug with speckled glaze&#10;IMG_4021.jpg"></textarea>
+    <div class="btns">
+      <button class="btn ghost" id="aChkExample">Load example</button>
+      <button class="btn ghost" id="aChkClear">Clear</button>
+    </div>
+    <div class="bwrap"><table class="btable gtable">
+      <thead><tr><th>#</th><th>Alt text</th><th>Length</th><th>What to fix</th></tr></thead>
+      <tbody id="aChkRows"><tr><td colspan="4" class="sub">Paste alt text or press "Load example".</td></tr></tbody>
+    </table></div>
+    <p class="note">The part past 125 characters is crossed out. Cut it, or move that detail into your product description.</p>
   </div>
 </section>
 
@@ -689,6 +773,183 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
     runTags();
   });
   runTags();
+
+  // ---------- alt text helper ----------
+  const ALTMAX=125, ETSYALT=250;
+  const ALTSTOP=new Set(['the','and','with','for','its','are','was','this','that','from','one']);
+  const SHOTS=[
+    ['main','Main photo',true],
+    ['back','Back view',false],
+    ['side','Side view',true],
+    ['detail','Close-up of a detail',true],
+    ['inuse','In use (lifestyle)',true],
+    ['scale','In a hand (scale)',true],
+    ['size','Size or measurements',true],
+    ['packaging','Packaging',false],
+    ['label','Label close-up',false],
+    ['model','On a model (clothing, jewellery)',false]
+  ];
+  const altEdits={};
+  function altShotBoxes(extra){
+    $('aShots').innerHTML=SHOTS.map(([k,n,on])=>`<label><input type="checkbox" value="${k}"${on||(extra&&extra.includes(k))?' checked':''}> ${esc(n)}</label>`).join('');
+  }
+  const aClean=s=>s.replace(/\s+/g,' ').trim();
+  const aCap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):s;
+  const aArt=s=>(/^[aeiou]/i.test(s)?'an ':'a ')+s;
+  function altParts(){
+    const v=id=>aClean($(id).value);
+    const p={product:v('aProduct'),colour:v('aColour'),material:v('aMaterial'),brand:v('aBrand'),size:v('aSize'),detail:v('aDetail'),scene:v('aScene')};
+    const inP=w=>w&&(' '+p.product.toLowerCase()+' ').includes(' '+w.toLowerCase()+' ');
+    const col=inP(p.colour)?'':p.colour, mat=inP(p.material)?'':p.material;
+    p.np=[col,mat,p.product].filter(Boolean).join(' ');
+    p.cp=[col,p.product].filter(Boolean).join(' ');
+    p.d=p.detail.replace(/^with\s+/i,'');
+    p.dp=p.d?(/^(in|on|and|made|for)\b/i.test(p.d)?' '+p.d:' with '+p.d):'';
+    return p;
+  }
+  function buildAlt(k,p){
+    if(!p.product) return '';
+    let t='';
+    switch(k){
+      case 'main': t=(p.brand?p.brand+' ':'')+p.np+p.dp; break;
+      case 'back': t='Back view of '+aArt(p.np); break;
+      case 'side': t='Side view of '+aArt(p.np)+p.dp; break;
+      case 'detail': t=p.d?`Close-up of the ${p.d} on ${aArt(p.cp)}`:`Close-up of the ${p.material?p.material+' ':''}surface of ${aArt(p.cp)}`; break;
+      case 'inuse': t=aArt(p.np)+' '+(p.scene||'in use'); break;
+      case 'scale': t=aArt(p.np)+' held in a hand to show its size'; break;
+      case 'size': t=p.size?`Size of the ${p.cp}: ${p.size}`:`Size guide for ${aArt(p.cp)}`; break;
+      case 'packaging': t=aArt(p.cp)+' with its packaging'; break;
+      case 'label': t=`Close-up of the ${p.brand?p.brand+' ':''}label on ${aArt(p.np)}`; break;
+      case 'model': t='Model wearing '+aArt(p.np)+p.dp; break;
+    }
+    return aCap(aClean(t));
+  }
+  function checkAlt(t){
+    const s=t.trim(), n=Array.from(s).length, errs=[], tips=[];
+    if(!s){ errs.push('Empty. Write what the photo shows.'); return {n,errs,tips}; }
+    if(n>ETSYALT) errs.push(`${n} characters. Etsy takes up to about ${ETSYALT}. Cut it to ${ALTMAX} or fewer.`);
+    else if(n>ALTMAX) errs.push(`${n-ALTMAX} character${n-ALTMAX>1?'s':''} over ${ALTMAX}. Shopify suggests ${ALTMAX} or fewer, so it is quick to hear on a screen reader.`);
+    if(/\b(IMG|DSC|DCIM|PXL|Screenshot)[ _-]?\d+|\.(jpe?g|png|webp|gif|heic|avif)\b/i.test(s)) errs.push('Looks like a file name. Write what the photo shows.');
+    const ws=s.toLowerCase().match(/[\p{L}\p{N}']+/gu)||[];
+    const cnt={}; ws.forEach(w=>{ if(w.length>2&&!ALTSTOP.has(w)) cnt[w]=(cnt[w]||0)+1; });
+    const rep=Object.entries(cnt).filter(([,c])=>c>=3).map(([w,c])=>`"${w}" (${c}x)`);
+    if(rep.length) errs.push(`Same word again and again: ${rep.join(', ')}. This reads as keyword stuffing.`);
+    if(/^(an?\s+)?(image|photo|picture|pic|photograph|graphic)\b/i.test(s)) tips.push('Skip "Photo of" or "Image of". Screen readers already say it is an image.');
+    if(ws.length<3) tips.push('Very short. Add the colour, the material or what the photo shows.');
+    if(/\b(buy|sale|cheap|cheapest|best|discount|deal|order now|shop now|free shipping)\b|%\s*off/i.test(s)) tips.push('Describe the photo, not the offer. Leave out words like "sale", "best" or "buy now".');
+    if((s.match(/\b[A-Z]{3,}\b/g)||[]).length>1) tips.push('Words in CAPITALS may be read out letter by letter. Use normal case.');
+    if(/\p{Extended_Pictographic}|[#★☆✓✔→]/u.test(s)) tips.push('Leave out emoji, hashtags and symbols. Screen readers read them out by name.');
+    return {n,errs,tips};
+  }
+  const altName=k=>SHOTS.find(s=>s[0]===k)[1];
+  function renderAlt(){
+    const p=altParts(), ks=Array.from($('aShots').querySelectorAll('input:checked')).map(i=>i.value);
+    if(!p.product && !ks.some(k=>altEdits[k]!=null)) $('aRows').innerHTML='<p class="sub">Type a product type, or press "Load example".</p>';
+    else if(!ks.length) $('aRows').innerHTML='<p class="sub">Tick at least one photo.</p>';
+    else {
+      $('aRows').innerHTML=ks.map((k,i)=>`<div class="arow" data-k="${k}"><div class="top"><span>${i+1}. ${esc(altName(k))} <span class="st"></span></span><span class="acts"><span class="cnt"></span><button class="btn ghost sm" data-act="reset" hidden>Use built text</button><button class="btn ghost sm" data-act="copy">Copy</button></span></div><textarea rows="2" aria-label="Alt text for ${esc(altName(k))}"></textarea><div class="bar"><i></i></div><ul></ul></div>`).join('');
+      $('aRows').querySelectorAll('.arow').forEach(r=>{
+        const k=r.dataset.k, built=buildAlt(k,p);
+        r.dataset.built=built;
+        r.querySelector('textarea').value=altEdits[k]!=null?altEdits[k]:built;
+      });
+    }
+    altStatus(p);
+  }
+  function altStatus(p){
+    p=p||altParts();
+    const rows=Array.from($('aRows').querySelectorAll('.arow'));
+    const texts=rows.map(r=>aClean(r.querySelector('textarea').value).toLowerCase());
+    let over=0, fix=0, tipN=0;
+    rows.forEach((r,i)=>{
+      const k=r.dataset.k, c=checkAlt(r.querySelector('textarea').value);
+      const j=texts.indexOf(texts[i]);
+      if(texts[i] && j!==i) c.tips.push(`Same text as photo ${j+1}. Say what is different in this photo.`);
+      if(k==='size' && !p.size && altEdits[k]==null) c.tips.push('Add the size above so the text gives the real numbers, like "350 ml, 9 cm tall".');
+      if(c.n>ALTMAX) over++;
+      if(c.errs.length) fix++; else if(c.tips.length) tipN++;
+      const cn=r.querySelector('.cnt'); cn.textContent=`${c.n} / ${ALTMAX}`; cn.className='cnt'+(c.n>ALTMAX?' neg':'');
+      const bar=r.querySelector('.bar'); bar.className='bar'+(c.n>ALTMAX?' over':c.n>ALTMAX*0.85?' near':'');
+      bar.querySelector('i').style.width=Math.min(100,c.n/ALTMAX*100)+'%';
+      r.querySelector('.st').innerHTML=c.errs.length?'<span class="pill no">Fix</span>':c.tips.length?'<span class="pill mid">Tip</span>':'<span class="pill ok">OK</span>';
+      r.querySelector('ul').innerHTML=c.errs.map(f=>`<li class="err">${esc(f)}</li>`).join('')+c.tips.map(f=>`<li class="tip">${esc(f)}</li>`).join('');
+      r.querySelector('[data-act=reset]').hidden=altEdits[k]==null;
+    });
+    $('aCount').textContent=rows.length;
+    $('aOver').textContent=over; $('aOver').className='v '+(over?'neg':'');
+    $('aFixN').textContent=fix; $('aFixN').className='v '+(fix?'neg':'');
+    const sum=[];
+    const item=(state,label,tip)=>sum.push(`<li class="${state}"><span class="dot"></span><span><b>${esc(label)}</b><br><span class="sub">${esc(tip)}</span></span></li>`);
+    if(!rows.length) item('mid','Waiting for your product','Type a product type, like "coffee mug" or "linen shirt", then add the colour and material.');
+    else {
+      if(fix) item('no',`${fix} photo${fix>1?'s':''} need${fix>1?'':'s'} a fix`,'Fix the red lines below first.');
+      else item('ok','Every line passes the checks',`${ALTMAX} characters or fewer, no file names, no keyword stuffing.`);
+      if(tipN) item('mid',`${tipN} line${tipN>1?'s':''} could be better`,'See the gold tips below.');
+      if(!p.colour||!p.material) item('mid','Add colour and material','They are what a shopper cannot see and often what they search for.');
+      item('ok','Check it against the real photo','Alt text must say what is in the photo. Edit a line if your photo shows something else.');
+    }
+    $('aSum').innerHTML=sum.join('');
+  }
+  ['aProduct','aColour','aMaterial','aBrand','aSize','aDetail','aScene'].forEach(id=>$(id).addEventListener('input',renderAlt));
+  $('aShots').addEventListener('change',renderAlt);
+  $('aRows').addEventListener('input',e=>{
+    const r=e.target.closest('.arow'); if(!r||e.target.tagName!=='TEXTAREA') return;
+    if(e.target.value===r.dataset.built) delete altEdits[r.dataset.k]; else altEdits[r.dataset.k]=e.target.value;
+    altStatus();
+  });
+  $('aRows').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    const r=b.closest('.arow'), k=r.dataset.k;
+    if(b.dataset.act==='reset'){ delete altEdits[k]; renderAlt(); return; }
+    const t=aClean(r.querySelector('textarea').value); if(!t) return;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1500);}).catch(()=>{});
+  });
+  $('aCopy').addEventListener('click',()=>{
+    const t=Array.from($('aRows').querySelectorAll('.arow')).map(r=>`${altName(r.dataset.k)}: ${aClean(r.querySelector('textarea').value)}`).join('\n');
+    if(!t) return;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$('aCopy').textContent='Copied';setTimeout(()=>$('aCopy').textContent='Copy all',1500);}).catch(()=>{});
+  });
+  const altFields={aProduct:'coffee mug',aColour:'sage green',aMaterial:'stoneware',aBrand:'Fernmoor',aSize:'350 ml, 9 cm tall',aDetail:'speckled glaze',aScene:'filled with coffee on a wooden breakfast table'};
+  $('aExample').addEventListener('click',()=>{
+    Object.keys(altEdits).forEach(k=>delete altEdits[k]);
+    Object.entries(altFields).forEach(([id,v])=>$(id).value=v);
+    altShotBoxes(['packaging']); renderAlt();
+  });
+  $('aClear').addEventListener('click',()=>{
+    Object.keys(altEdits).forEach(k=>delete altEdits[k]);
+    Object.keys(altFields).forEach(id=>$(id).value='');
+    altShotBoxes(); renderAlt();
+  });
+  function runAltCheck(){
+    const lines=$('aList').value.split('\n').map(s=>s.trim()).filter(Boolean).slice(0,200);
+    if(!lines.length){ $('aChkRows').innerHTML='<tr><td colspan="4" class="sub">Paste alt text or press "Load example".</td></tr>'; return; }
+    const low=lines.map(s=>aClean(s).toLowerCase());
+    $('aChkRows').innerHTML=lines.map((s,i)=>{
+      const c=checkAlt(s), j=low.indexOf(low[i]);
+      if(j!==i) c.tips.push(`Same text as line ${j+1}. Each photo needs its own text.`);
+      const ch=Array.from(s), long=c.n>ALTMAX;
+      const tt=long?`${esc(ch.slice(0,ALTMAX).join(''))}<mark>${esc(ch.slice(ALTMAX).join(''))}</mark>`:esc(s);
+      const pill=c.errs.length?'<span class="pill no">Fix</span>':c.tips.length?'<span class="pill mid">Tip</span>':'<span class="pill ok">OK</span>';
+      const list=c.errs.length||c.tips.length?`<ul>${c.errs.map(f=>`<li>${esc(f)}</li>`).join('')}${c.tips.map(f=>`<li class="tip">${esc(f)}</li>`).join('')}</ul>`:'';
+      return `<tr><td class="num">${i+1}</td><td class="bt">${tt}</td><td class="num ${long?'neg':''}">${c.n} / ${ALTMAX}</td><td>${pill}${list}</td></tr>`;
+    }).join('');
+  }
+  $('aList').addEventListener('input',runAltCheck);
+  $('aChkExample').addEventListener('click',()=>{
+    $('aList').value=[
+      'IMG_4021.jpg',
+      'Photo of mug',
+      'Mug mug best coffee mug ceramic mug gift mug SALE',
+      'Sage green stoneware coffee mug with speckled glaze',
+      'Sage green stoneware coffee mug with speckled glaze',
+      'Handmade sage green stoneware coffee mug with a speckled glaze, a wide easy-grip handle and a smooth rim, shown on a wooden table next to a book',
+      'Cute mug ☕ #mugs'
+    ].join('\n');
+    runAltCheck();
+  });
+  $('aChkClear').addEventListener('click',()=>{ $('aList').value=''; runAltCheck(); });
+  altShotBoxes(); renderAlt(); runAltCheck();
+
 })();
 </script>
 </body>

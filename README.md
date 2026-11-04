@@ -1,6 +1,6 @@
 # Shop Tools
 
-**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), check your 13 Etsy tags, and see your real profit per sale.**
+**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), check your 13 Etsy tags, write alt text for your product photos, and see your real profit per sale.**
 
 **Live demo:** https://legacyroar7-maker.github.io/shop-tools/
 
@@ -56,7 +56,7 @@ How to use it with your shop:
 
 ![Bulk title checker](preview-bulk.png)
 
-### 4. Etsy tag checker (new)
+### 4. Etsy tag checker
 Paste your tags, one per line or with commas between them. Add your listing title too (optional). Each tag gets a row with what to fix:
 
 | Check | What it flags | Colour |
@@ -81,7 +81,47 @@ How to use it with your shop:
 
 Rules used come from Etsy's help pages: up to 13 tags, up to 20 characters each. Platforms change their rules, so check Etsy's help pages too.
 
-### 5. Profit calculator
+### 5. Alt text helper (new)
+Alt text is the short line that tells shoppers who use a screen reader what is in a photo. Search engines and AI tools read it too. It is often left empty or filled with the file name.
+
+Fill in the product once: product type, colour, material, and if you want, brand, size, a key detail and a scene. Tick the photos you have. You get one short alt text line per photo, ready to copy:
+
+| Photo | Demo alt text (made-up brand Fernmoor) |
+|---|---|
+| Main photo | Fernmoor sage green stoneware coffee mug with speckled glaze |
+| Side view | Side view of a sage green stoneware coffee mug with speckled glaze |
+| Close-up of a detail | Close-up of the speckled glaze on a sage green coffee mug |
+| In use | A sage green stoneware coffee mug filled with coffee on a wooden breakfast table |
+| In a hand | A sage green stoneware coffee mug held in a hand to show its size |
+| Size | Size of the sage green coffee mug: 350 ml, 9 cm tall |
+
+Also in the list: back view, packaging, label close-up and on a model (for clothing and jewellery). You can edit every line, and each line is checked as you type:
+
+| Check | What it flags | Colour |
+|---|---|---|
+| Too long | Over 125 characters. Shopify suggests 125 or fewer. Etsy takes up to about 250. | Red |
+| File name | Text like IMG_4021.jpg instead of words. | Red |
+| Keyword stuffing | The same word 3 times or more. | Red |
+| "Photo of" at the start | Screen readers already say it is an image. | Gold: a tip |
+| Very short | Fewer than 3 words. Add colour, material or what the photo shows. | Gold: a tip |
+| Sales words | "Sale", "best", "buy now" and similar. Describe the photo, not the offer. | Gold: a tip |
+| CAPITALS, emoji, hashtags | Screen readers may read them out letter by letter or by name. | Gold: a tip |
+| Same text twice | Two photos with the same line. Say what is different in each photo. | Gold: a tip |
+
+**Check alt text you already have:** paste your current alt text, one per line (up to 200), and get the same checks for each line.
+
+How to use it with your shop:
+
+1. Open the live page and pick the **Alt text helper** tab.
+2. Fill in the product and tick the photos you have.
+3. Read each line next to the real photo. Edit any line that does not match what the photo shows.
+4. Paste each line into your shop. Shopify: Products, open the product, click the photo, add alt text, save. Etsy: Shop Manager, Listings, open the listing, click the photo, fill in "Alt text", press Apply.
+
+![Alt text helper](preview-alt.png)
+
+Good alt text helps people who cannot see the photo, and gives search engines and AI tools clear words about your product. It does not promise a higher ranking. Limits come from Shopify's and Etsy's help pages, and platforms change their rules, so check them too.
+
+### 6. Profit calculator
 Type your product cost, shipping, packaging, ads and fees. You get:
 
 - Profit per sale and margin
