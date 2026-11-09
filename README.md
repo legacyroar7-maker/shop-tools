@@ -1,6 +1,6 @@
 # Shop Tools
 
-**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), check your 13 Etsy tags, write alt text for your product photos, and see your real profit per sale.**
+**Free tools for online shop owners. Check a product page for SEO and AEO, check if your titles fit Etsy, eBay and Google (one title or a whole list), check your 13 Etsy tags, write alt text for your product photos, make clean URL handles, and see your real profit per sale.**
 
 **Live demo:** https://legacyroar7-maker.github.io/shop-tools/
 
@@ -81,7 +81,7 @@ How to use it with your shop:
 
 Rules used come from Etsy's help pages: up to 13 tags, up to 20 characters each. Platforms change their rules, so check Etsy's help pages too.
 
-### 5. Alt text helper (new)
+### 5. Alt text helper
 Alt text is the short line that tells shoppers who use a screen reader what is in a photo. Search engines and AI tools read it too. It is often left empty or filled with the file name.
 
 Fill in the product once: product type, colour, material, and if you want, brand, size, a key detail and a scene. Tick the photos you have. You get one short alt text line per photo, ready to copy:
@@ -121,7 +121,59 @@ How to use it with your shop:
 
 Good alt text helps people who cannot see the photo, and gives search engines and AI tools clear words about your product. It does not promise a higher ranking. Limits come from Shopify's and Etsy's help pages, and platforms change their rules, so check them too.
 
-### 6. Profit calculator
+### 6. URL handle maker (new)
+The handle is the end of a page link: yourshop.com/products/**sage-green-coffee-mug**. Shopify builds it from your first product name, so it often stays long, messy or full of sales words like "new" or "sale" long after the sale ends.
+
+Type a product or collection name. You get a clean handle as you type:
+
+| Step | What the tool does |
+|---|---|
+| Lowercase and dashes | Capitals become lowercase, spaces and symbols become one dash. |
+| Letters like é, ü, ł | Changed to e, u, l, so the link stays readable when it is shared. |
+| Filler words | Takes out the, and, for, with, of and similar words. |
+| Sales words | Takes out best, new, sale, "20% off" and "free shipping". |
+| Words used twice | Keeps each word once. |
+| Length | Shows the count out of 60. If it is longer, you get a shorter version cut at a whole word. |
+
+Demo with made-up brand Fernmoor:
+
+| Product name | Handle |
+|---|---|
+| The Best Handmade Ceramic Coffee Mug - Sage Green Coffee Mug, 350 ml (NEW!) | handmade-ceramic-coffee-mug-sage-green-350-ml |
+| Linen Shirt - Blue - 20% OFF - Free Shipping | linen-shirt-blue |
+| Crème Brûlée Scented Candle | creme-brulee-scented-candle |
+
+Untick a box when a word is part of the real name, like "New York". You also see a link preview with your shop address and can copy the handle or the full link.
+
+**Many at once:** paste up to 500 lines. Check the handles or links you have now, or turn a list of names into handles. Each line gets a suggested handle and what to fix:
+
+| Check | What it flags | Colour |
+|---|---|---|
+| Over 60 characters | Shopify takes up to 255, but a short link is easier to read, share and trust. | Red |
+| Capitals, spaces, symbols | Anything that is not a to z, 0 to 9 or a dash, like _ or &. | Red |
+| Dashes | Two dashes in a row, or a dash at the start or end. | Red |
+| Same handle twice | Each page needs its own handle. | Red |
+| Ends with -1 or -copy | Shopify adds this when a handle is taken, often after you copy a product. | Gold: a tip |
+| Filler or sales words | Words you can usually leave out. | Gold: a tip |
+| A year | Like 2025. It can make the link look old later. | Gold: a tip |
+
+**Download results (CSV)** gives you the list with suggested handles to work through.
+
+How to use it with your shop:
+
+1. Open the live page and pick the **URL handle maker** tab.
+2. Type the product or collection name and pick the page type.
+3. Read the handle. Untick a box if it took out a word you need.
+4. In Shopify, open the product or collection, go to "Search engine listing", click the pencil and paste the new "URL handle".
+5. If the page is already live, tick **Create a URL redirect** before you save, so old links and bookmarks still work.
+
+Do not change the Handle column in a product CSV import. Shopify reads a new handle as a new product.
+
+![URL handle maker](preview-handle.png)
+
+A clean handle makes a link easier to read, share and trust, and gives search engines and AI tools clear words about the page. It does not promise a higher ranking. Shopify's menu names and rules can change, so check its help pages too.
+
+### 7. Profit calculator
 Type your product cost, shipping, packaging, ads and fees. You get:
 
 - Profit per sale and margin

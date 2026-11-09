@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shop Tools | Product Page Checker, Title and Tag Checkers, Alt Text Helper, Profit Calculator</title>
-<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), check your 13 Etsy tags, write alt text for product photos, and work out your real profit per sale.">
+<title>Shop Tools | Product Page Checker, Title and Tag Checkers, Alt Text Helper, URL Handle Maker, Profit Calculator</title>
+<meta name="description" content="Free tools for online shop owners: check a product page for SEO and AEO, check if titles fit Etsy, eBay and Google (one or many at once), check your 13 Etsy tags, write alt text for product photos, make clean URL handles, and work out your real profit per sale.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -110,6 +110,11 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
 .arow li{margin:2px 0}
 .arow li.err{color:var(--bad)} .arow li.tip{color:var(--warn)}
 .btn.sm{padding:5px 12px;font-size:13px}
+.hbox{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-wrap:anywhere;min-height:48px}
+.hbox mark{background:#F3D9D9;color:var(--bad);text-decoration:line-through}
+.hmono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;overflow-wrap:anywhere}
+.htable{min-width:760px}
+.htable td.bt{width:26%}
 @media (max-width:640px){.shots{grid-template-columns:1fr}}
 @media (max-width:640px){
   .btable{min-width:0}
@@ -120,6 +125,8 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   .btable td:not(:first-child){grid-column:2}
   .btable td[colspan]{grid-column:1/-1;grid-row:auto}
   .gtable td.bt{width:auto}
+  .htable td.bt{width:auto}
+  .btable.htable td:first-child{grid-row:span 4}
   .kpi .v{font-size:22px}
 }
 </style>
@@ -129,13 +136,14 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   <div class="wrap">
     <div class="eyebrow">Shop Tools &middot; by Tuli, Satin &amp; Scale</div>
     <h1>Make every product page<br>easy to find and worth selling.</h1>
-    <p class="lead">Six free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Check your 13 Etsy tags. Write alt text for your product photos. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
+    <p class="lead">Seven free tools for online shop owners. Check a product page for SEO and AEO, then copy ready-made schema code. See if your titles fit Etsy, eBay and Google, one at a time or a whole list at once. Check your 13 Etsy tags. Write alt text for your product photos. Make clean URL handles for products and collections. Or work out your real profit before you set a price. Everything runs in your browser. Nothing is sent anywhere.</p>
     <nav class="tabs" role="tablist">
       <button role="tab" aria-selected="true" data-tab="checker">Product page checker</button>
       <button role="tab" aria-selected="false" data-tab="titles">Title checker</button>
       <button role="tab" aria-selected="false" data-tab="bulk">Bulk title checker</button>
       <button role="tab" aria-selected="false" data-tab="tags">Etsy tag checker</button>
       <button role="tab" aria-selected="false" data-tab="alt">Alt text helper</button>
+      <button role="tab" aria-selected="false" data-tab="handle">URL handle maker</button>
       <button role="tab" aria-selected="false" data-tab="profit">Profit calculator</button>
     </nav>
   </div>
@@ -375,6 +383,87 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
       <tbody id="aChkRows"><tr><td colspan="4" class="sub">Paste alt text or press "Load example".</td></tr></tbody>
     </table></div>
     <p class="note">The part past 125 characters is crossed out. Cut it, or move that detail into your product description.</p>
+  </div>
+</section>
+
+<!-- TOOL 7: URL handle maker -->
+<section id="handle" hidden>
+  <div class="grid">
+    <div class="card">
+      <h2>Make a clean URL handle</h2>
+      <p class="sub">The handle is the end of your page link, like yourshop.com/products/<b>sage-green-coffee-mug</b>. Type a product or collection name. You get a short lowercase handle with dashes, without filler words. It updates as you type.</p>
+      <label for="hName">Product or collection name</label>
+      <input id="hName" placeholder="The Best Handmade Ceramic Coffee Mug - Sage Green (NEW!)">
+      <div class="row">
+        <div><label for="hType">Page type</label>
+          <select id="hType">
+            <option value="product">Product</option>
+            <option value="collection">Collection</option>
+            <option value="page">Page (About, FAQ)</option>
+          </select></div>
+        <div><label for="hShop">Shop address <small>(optional)</small></label><input id="hShop" placeholder="yourshop.com"></div>
+      </div>
+      <span class="lbl">Remove</span>
+      <label class="inline" style="margin-top:4px"><input type="checkbox" id="hFill" checked> Filler words (the, and, for, with, of...)</label>
+      <label class="inline" style="margin-top:6px"><input type="checkbox" id="hSale" checked> Sales words (best, new, sale, 20% off...)</label>
+      <label class="inline" style="margin-top:6px"><input type="checkbox" id="hRep" checked> Words used twice</label>
+      <div class="btns">
+        <button class="btn" id="hExample">Load example</button>
+        <button class="btn ghost" id="hCopy">Copy handle</button>
+        <button class="btn ghost" id="hCopyUrl">Copy full link</button>
+        <button class="btn ghost" id="hClear">Clear</button>
+      </div>
+      <p class="note">Rules used: lowercase letters a to z, numbers and dashes only. Letters like &eacute;, &uuml; or &#322; become e, u and l. Shopify takes handles up to 255 characters. This tool uses 60 as a guide, because a short link is easier to read, share and trust. Untick a box if a word is part of the real name, like "New York".</p>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Your handle</h3>
+        <div class="hbox" id="hOut"><span class="sub">Type a name or press "Load example".</span></div>
+        <div class="lim" style="border-top:0;padding-top:8px">
+          <div class="top"><span>Length</span><span id="hCount">0 / 60</span></div>
+          <div class="bar" id="hBar"><i style="width:0"></i></div>
+        </div>
+        <div id="hShort"></div>
+        <div class="serp" style="margin-top:12px">
+          <div class="u" id="hUrl">yourshop.com &rsaquo; products &rsaquo; ...</div>
+        </div>
+        <ul class="checks" id="hChecks"></ul>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>Where to paste it</h3>
+        <p class="sub" style="margin:0"><b>Shopify product or collection:</b> open it, scroll to "Search engine listing", click the pencil, change "URL handle", save.<br><b>Page already live?</b> Tick "Create a URL redirect" before you save, so old links still work.</p>
+        <p class="note">Do not change the Handle column in a product CSV import. Shopify reads a new handle as a new product. Menu names can change, so check Shopify's help pages too.</p>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px">
+    <h3>Many at once</h3>
+    <p class="sub">Paste one line per product or collection (up to 500). Check the handles or links you have now, or turn a list of names into handles.</p>
+    <div class="row">
+      <div><label for="hMode">My lines are</label>
+        <select id="hMode">
+          <option value="check">Handles or links I have now</option>
+          <option value="make">Names to turn into handles</option>
+        </select></div>
+      <div></div>
+    </div>
+    <label for="hList">Lines <small>(one per line)</small></label>
+    <textarea id="hList" style="min-height:160px" placeholder="sage-green-coffee-mug&#10;https://yourshop.com/products/the-best-mug-SALE-2025"></textarea>
+    <div class="btns">
+      <button class="btn ghost" id="hListExample">Load example</button>
+      <button class="btn ghost" id="hCsv">Download results (CSV)</button>
+      <button class="btn ghost" id="hListClear">Clear</button>
+    </div>
+    <div class="kpis" style="margin-top:18px">
+      <div class="kpi"><div class="v" id="hTotal">0</div><div class="l">Lines</div></div>
+      <div class="kpi"><div class="v" id="hFixN">0</div><div class="l">Need a fix</div></div>
+      <div class="kpi"><div class="v" id="hLongN">0</div><div class="l">Over 60</div></div>
+    </div>
+    <div class="bwrap"><table class="btable htable">
+      <thead><tr><th>#</th><th>Your line</th><th>Suggested handle</th><th>Length</th><th>What to fix</th></tr></thead>
+      <tbody id="hRows"><tr><td colspan="5" class="sub">Paste handles or press "Load example".</td></tr></tbody>
+    </table></div>
+    <p class="note">The suggested handle uses the "Remove" boxes above and is cut at a whole word to stay within 60 characters. Read each one before you use it. If two products get the same handle, Shopify adds -1 to the second one, so add a detail like colour or size.</p>
   </div>
 </section>
 
@@ -949,6 +1038,196 @@ footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--taupe);f
   });
   $('aChkClear').addEventListener('click',()=>{ $('aList').value=''; runAltCheck(); });
   altShotBoxes(); renderAlt(); runAltCheck();
+
+  // ---------- URL handle maker ----------
+  const HMAX=60, HSHOP=255, HLINES=500;
+  const HFILL=new Set(['a','an','the','and','or','for','with','of','in','on','at','to','by','from','your','our','my','this','that','is','it','its']);
+  const HSALE=new Set(['best','new','sale','cheap','cheapest','discount','discounted','deal','deals','offer','bestseller','bestselling','clearance']);
+  const HPATH={product:'products',collection:'collections',page:'pages'};
+  const HMAP={'ł':'l','ß':'ss','æ':'ae','ø':'o','đ':'d','œ':'oe','þ':'th','ð':'d','ı':'i'};
+  const HNUMOK=new Set(['of','x','pack','set','size','no','number','part','vol','volume','gen','series','grade','level','step','type','model']);
+  const hOpts=()=>({fill:$('hFill').checked, sales:$('hSale').checked, rep:$('hRep').checked});
+  function makeHandle(name,o){
+    const removed=[], dropped=new Set();
+    let s=name.toLowerCase().replace(/[łßæøđœþðı]/g,c=>HMAP[c]).normalize('NFD').replace(/[̀-ͯ]/g,'');
+    s=s.replace(/&/g,' and ');
+    if(o.sales) s=s.replace(/\b\d+\s*%\s*off\b|\bfree\s+(shipping|delivery)\b/g,m=>{removed.push({w:m.replace(/\s+/g,' '),why:'sales word'});return ' ';});
+    s=s.replace(/['’‘`]/g,'');
+    Array.from(s).forEach(c=>{ if(/[^\x00-\x7f]/.test(c) && /[\p{L}\p{N}]/u.test(c)) dropped.add(c); });
+    const all=s.replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(Boolean);
+    const out=[], seen=new Set();
+    all.forEach(w=>{
+      if(o.fill && HFILL.has(w)){ removed.push({w,why:'filler'}); return; }
+      if(o.sales && HSALE.has(w)){ removed.push({w,why:'sales word'}); return; }
+      if(o.rep && seen.has(w)){ removed.push({w,why:'used twice'}); return; }
+      seen.add(w); out.push(w);
+    });
+    const keep=out.length?out:all;
+    return {handle:keep.join('-'), removed:out.length?removed:[], dropped:[...dropped], fallback:!out.length&&all.length>0};
+  }
+  function shortHandle(h,max){
+    if(h.length<=max) return h;
+    const i=h.slice(0,max+1).lastIndexOf('-');
+    return i>0?h.slice(0,i):h.slice(0,max);
+  }
+  function checkHandle(h){
+    const errs=[], tips=[], n=Array.from(h).length;
+    if(!h){ errs.push('Empty. Type a name to build a handle.'); return {n,errs,tips}; }
+    if(n>HMAX) errs.push(`${n-HMAX} character${n-HMAX>1?'s':''} over ${HMAX}. Shopify takes up to ${HSHOP}, but a short link is easier to read, share and trust.`);
+    if(/[A-Z]/.test(h)) errs.push('Capital letters. Use lowercase only.');
+    if(/\s/.test(h)) errs.push('Spaces. Use a dash (-) between words.');
+    const bad=[...new Set(Array.from(h.replace(/\s/g,'')).filter(c=>!/[a-zA-Z0-9-]/.test(c)))];
+    if(bad.length) errs.push(`Characters to avoid: ${bad.join(' ')}. Use a to z, 0 to 9 and dashes only.`);
+    if(/--/.test(h)) errs.push('Two dashes in a row. Use one.');
+    if(/^-|-$/.test(h)) errs.push('Starts or ends with a dash. Remove it.');
+    const ws=h.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+    const last=ws[ws.length-1], prev=ws[ws.length-2];
+    if(ws.length>1 && (/-copy(-\d+)?$/i.test(h) || (/^\d$/.test(last) && !HNUMOK.has(prev)))) tips.push(`Ends with "-${/-copy(-\d+)?$/i.test(h)?h.match(/copy(-\d+)?$/i)[0]:last}". Shopify adds this when the handle is already taken, often after you copy a product. Check it is not a duplicate.`);
+    const f=[...new Set(ws.filter(w=>HFILL.has(w)))];
+    if(f.length) tips.push(`Filler words: ${f.join(', ')}. You can usually leave them out.`);
+    const sa=[...new Set(ws.filter(w=>HSALE.has(w)))];
+    if(sa.length||/\d+-off(-|$)/.test(h.toLowerCase())) tips.push(`Sales words${sa.length?': '+sa.join(', '):''}${/\d+-off(-|$)/.test(h.toLowerCase())?(sa.length?', ':': ')+'% off':''}. The link stays after the sale ends, so leave them out.`);
+    const cnt={}; ws.forEach(w=>{ if(w.length>2 && !/^\d+$/.test(w)) cnt[w]=(cnt[w]||0)+1; });
+    const rep=Object.entries(cnt).filter(([,c])=>c>1).map(([w,c])=>`"${w}" (${c}x)`);
+    if(rep.length) tips.push(`Repeated words: ${rep.join(', ')}. Once is enough.`);
+    if(/(^|-)(19|20)\d{2}(-|$)/.test(h)) tips.push('A year can make the link look old later. Leave it out unless the year is part of the product.');
+    if(ws.length===1) tips.push('One word only. Add the product type and one detail, like colour or material.');
+    return {n,errs,tips};
+  }
+  let hBest='';
+  function hShopBase(){
+    const s=($('hShop').value.trim()||'yourshop.com').replace(/^https?:\/\//i,'').replace(/\/.*$/,'');
+    return s||'yourshop.com';
+  }
+  function hFullUrl(h){ return `https://${hShopBase()}/${HPATH[$('hType').value]}/${h}`; }
+  function runHandle(){
+    const name=$('hName').value, r=makeHandle(name,hOpts()), h=r.handle, n=h.length;
+    const sh=shortHandle(h,HMAX); hBest=sh;
+    $('hOut').innerHTML=h?(n>HMAX?`${esc(h.slice(0,HMAX))}<mark>${esc(h.slice(HMAX))}</mark>`:esc(h)):'<span class="sub">Type a name or press "Load example".</span>';
+    $('hCount').textContent=`${n} / ${HMAX}`; $('hCount').className=n>HMAX?'neg':'';
+    const bar=$('hBar'); bar.className='bar'+(n>HMAX?' over':n>HMAX*0.85?' near':'');
+    bar.querySelector('i').style.width=Math.min(100,n/HMAX*100)+'%';
+    $('hShort').innerHTML=n>HMAX?`<div class="cut"><b>Shorter version, cut at a whole word (${sh.length}):</b><br><span class="hmono">${esc(sh)}</span></div>`:'';
+    $('hCopy').textContent=n>HMAX?'Copy shorter handle':'Copy handle';
+    $('hUrl').innerHTML=`${esc(hShopBase())} &rsaquo; ${HPATH[$('hType').value]} &rsaquo; ${h?esc(sh):'...'}`;
+    const sum=[];
+    const item=(state,label,tip)=>sum.push(`<li class="${state}"><span class="dot"></span><span><b>${esc(label)}</b><br><span class="sub">${esc(tip)}</span></span></li>`);
+    if(!name.trim()) item('mid','Waiting for a name','Type a product or collection name, like "Sage Green Coffee Mug".');
+    else if(!h) item('no','No letters or numbers left','Use a name with letters a to z or numbers.');
+    else {
+      if(n>HMAX) item('no',`${n-HMAX} character${n-HMAX>1?'s':''} over ${HMAX}`,'Use the shorter version, or take out a word you do not need, like a second colour or a style word.');
+      else item('ok',`${n} characters, within ${HMAX}`,'Short and easy to read.');
+      if(r.removed.length){
+        const by={}; r.removed.forEach(x=>{(by[x.why]=by[x.why]||[]).push(x.w);});
+        item('ok',`Removed ${r.removed.length} word${r.removed.length>1?'s':''}`,Object.entries(by).map(([k,v])=>`${k}: ${[...new Set(v)].join(', ')}`).join(' | '));
+      } else if(r.fallback) item('mid','Only filler or sales words found','They were kept so the handle is not empty. Add the product type to the name.');
+      if(r.dropped.length) item('no',`Letters left out: ${r.dropped.join(' ')}`,'They are not a to z. Shopify can keep them, but shared links turn them into long codes like %D0%B6. Add a Latin-letter version of the name.');
+      const c=checkHandle(sh);
+      c.tips.filter(t=>/^A year|^One word/.test(t)).forEach(t=>item('mid',t.split('. ')[0],t.split('. ').slice(1).join('. ')));
+      item('mid','Changing a live link?','Old links stop working. In Shopify, tick "Create a URL redirect" when you save the new handle.');
+    }
+    $('hChecks').innerHTML=sum.join('');
+  }
+  ['hName','hShop'].forEach(id=>$(id).addEventListener('input',runHandle));
+  ['hType','hFill','hSale','hRep'].forEach(id=>$(id).addEventListener('change',()=>{ runHandle(); runHandleList(); }));
+  const hCopyTo=(btn,txt,label)=>{ if(!txt) return; (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>{btn.textContent='Copied';setTimeout(()=>{btn.textContent=label();},1500);}).catch(()=>{}); };
+  $('hCopy').addEventListener('click',()=>hCopyTo($('hCopy'),hBest,()=>hBest.length<makeHandle($('hName').value,hOpts()).handle.length?'Copy shorter handle':'Copy handle'));
+  $('hCopyUrl').addEventListener('click',()=>hCopyTo($('hCopyUrl'),hBest?hFullUrl(hBest):'',()=>'Copy full link'));
+  $('hExample').addEventListener('click',()=>{
+    $('hName').value='The Best Handmade Ceramic Coffee Mug - Sage Green Coffee Mug, 350 ml (NEW!)';
+    $('hType').value='product'; $('hShop').value='fernmoor.com';
+    ['hFill','hSale','hRep'].forEach(id=>$(id).checked=true);
+    runHandle();
+  });
+  $('hClear').addEventListener('click',()=>{ $('hName').value=''; $('hShop').value=''; runHandle(); });
+
+  let hData=[];
+  function hFromLine(line){
+    let t=line.trim();
+    if(/^https?:\/\//i.test(t) || /\//.test(t)){
+      t=t.replace(/[?#].*$/,'').replace(/\/+$/,'');
+      const m=t.match(/\/(products|collections|pages)\/([^\/]+)$/i);
+      if(m) return {h:m[2],path:m[1].toLowerCase()};
+      const parts=t.split('/').filter(Boolean); return {h:parts[parts.length-1]||'',path:''};
+    }
+    return {h:t,path:''};
+  }
+  function runHandleList(){
+    const mode=$('hMode').value, o=hOpts();
+    const raw=$('hList').value.split(/\r?\n/).filter(t=>t.trim());
+    const lines=raw.slice(0,HLINES);
+    const firstCur={}, firstSug={};
+    hData=lines.map((line,i)=>{
+      let cur='', sug='', c, full='';
+      if(mode==='check'){
+        const x=hFromLine(line); cur=x.h;
+        try{ cur=decodeURIComponent(cur); }catch(e){}
+        c=checkHandle(cur);
+        full=makeHandle(cur.replace(/-/g,' '),o).handle; sug=shortHandle(full,HMAX);
+        const k=cur.toLowerCase();
+        if(firstCur[k]) c.errs.push(`Same handle as line ${firstCur[k]}. Each page needs its own handle.`); else firstCur[k]=i+1;
+      } else {
+        full=makeHandle(line,o).handle; sug=shortHandle(full,HMAX);
+        c=checkHandle(sug);
+        if(full.length>HMAX) c.tips.unshift(`Cut from ${full.length} characters at a whole word. Read it to check it still makes sense.`);
+      }
+      if(sug){ if(firstSug[sug] && !c.errs.some(e=>/^Same handle/.test(e))) c.tips.push(`Same suggested handle as line ${firstSug[sug]}. Shopify adds -1 to the second one. Add a detail like colour or size.`); else firstSug[sug]=i+1; }
+      return {i:i+1,line:line.trim(),cur,sug,n:mode==='check'?Array.from(cur).length:sug.length,errs:c.errs,tips:c.tips,same:mode==='check'&&sug===cur};
+    });
+    const fixN=hData.filter(d=>d.errs.length).length, longN=hData.filter(d=>d.n>HMAX).length;
+    $('hTotal').textContent=hData.length; $('hFixN').textContent=fixN; $('hLongN').textContent=longN;
+    $('hFixN').className='v '+(fixN?'neg':''); $('hLongN').className='v '+(longN?'neg':'');
+    if(!hData.length){ $('hRows').innerHTML=`<tr><td colspan="5" class="sub">${mode==='check'?'Paste handles or links':'Paste names'} or press "Load example".</td></tr>`; return; }
+    $('hRows').innerHTML=hData.map(d=>{
+      const long=d.n>HMAX, shown=mode==='check'?d.cur:d.sug, ch=Array.from(shown);
+      const lineHtml=mode==='check'?(long?`${esc(ch.slice(0,HMAX).join(''))}<mark>${esc(ch.slice(HMAX).join(''))}</mark>`:esc(shown))+(d.line!==d.cur?`<br><span class="sub">${esc(d.line)}</span>`:''):esc(d.line);
+      const sugHtml=d.same?'<span class="sub">No change needed</span>':`<span class="hmono">${esc(d.sug)}</span>`;
+      const pill=d.errs.length?'<span class="pill no">Fix</span>':d.tips.length?'<span class="pill mid">Tip</span>':'<span class="pill ok">OK</span>';
+      const list=d.errs.length||d.tips.length?`<ul>${d.errs.map(f=>`<li>${esc(f)}</li>`).join('')}${d.tips.map(f=>`<li class="tip">${esc(f)}</li>`).join('')}</ul>`:'';
+      return `<tr><td class="num">${d.i}</td><td class="bt">${lineHtml}</td><td class="bt">${sugHtml}</td><td class="num ${long?'neg':''}">${d.n} / ${HMAX}</td><td>${pill}${list}</td></tr>`;
+    }).join('');
+    if(raw.length>HLINES) $('hRows').insertAdjacentHTML('beforeend',`<tr><td colspan="5" class="sub">Only the first ${HLINES} lines were checked.</td></tr>`);
+  }
+  $('hList').addEventListener('input',runHandleList);
+  $('hMode').addEventListener('change',()=>{
+    $('hList').placeholder=$('hMode').value==='check'?'sage-green-coffee-mug\nhttps://yourshop.com/products/the-best-mug-SALE-2025':'Sage Green Coffee Mug, 350 ml\nOatmeal Wool Cardigan, Cable Knit';
+    runHandleList();
+  });
+  $('hListExample').addEventListener('click',()=>{
+    $('hList').value=($('hMode').value==='check'?[
+      'sage-green-coffee-mug',
+      'https://fernmoor.com/products/the-best-handmade-ceramic-coffee-mug-SALE?variant=123',
+      'Oatmeal Wool Cardigan',
+      'linen_shirt_blue',
+      'soy-candle-fig-and-cedar-1',
+      'christmas-gift-set-2025',
+      'fernmoor-womens-oatmeal-cable-knit-button-front-chunky-winter-wool-cardigan',
+      'tote--bag-',
+      'sage-green-coffee-mug',
+      'https://fernmoor.com/collections/ceramic-vases'
+    ]:[
+      'The Best Handmade Ceramic Coffee Mug - Sage Green (NEW!)',
+      'Oatmeal Wool Cardigan, Cable Knit, Button Front',
+      'Soy Candle in Amber Jar, Fig & Cedar, 200 g',
+      'Crème Brûlée Scented Candle',
+      'Leather Card Holder for Men and Women, Slim, Tan, Hand Stitched, Gift for Him or Her',
+      'Sage Green Coffee Mug',
+      'Linen Shirt - Blue - 20% OFF - Free Shipping'
+    ]).join('\n');
+    runHandleList();
+  });
+  $('hListClear').addEventListener('click',()=>{ $('hList').value=''; runHandleList(); });
+  $('hCsv').addEventListener('click',()=>{
+    if(!hData.length) runHandleList();
+    if(!hData.length) return;
+    const q=s=>'"'+String(s).replace(/"/g,'""')+'"';
+    const out=[['line','your_line','current_handle','suggested_handle','length','status','what_to_fix'].join(',')].concat(
+      hData.map(d=>[d.i,q(d.line),q(d.cur),q(d.sug),d.n,d.errs.length?'fix':d.tips.length?'tip':'ok',q(d.errs.concat(d.tips).join(' | '))].join(',')));
+    const blob=new Blob(['﻿'+out.join('\r\n')],{type:'text/csv;charset=utf-8'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='url-handle-results.csv';
+    document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+  });
+  runHandle(); runHandleList();
 
 })();
 </script>
