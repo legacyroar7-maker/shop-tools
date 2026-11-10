@@ -169,6 +169,8 @@ How to use it with your shop:
 
 Do not change the Handle column in a product CSV import. Shopify reads a new handle as a new product.
 
+Writing a collection page too? Use the free **[Collection pages prompts](https://github.com/legacyroar7-maker/ai-prompts#14-collection-pages)** for the intro, the FAQ and links to other collections.
+
 ![URL handle maker](preview-handle.png)
 
 A clean handle makes a link easier to read, share and trust, and gives search engines and AI tools clear words about the page. It does not promise a higher ranking. Shopify's menu names and rules can change, so check its help pages too.
